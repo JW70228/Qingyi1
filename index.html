@@ -302,6 +302,7 @@
         }
 
         .scrollbox_container_card {
+            cursor: pointer;
             box-shadow: 0 0 15px rgb(0, 0, 0);
             position: relative;
             width: 65rem;
@@ -312,31 +313,35 @@
             margin-right: 5rem;
             flex-shrink: 0;
             overflow: hidden;
-            cursor: pointer;
-            transition: filter 0.3s ease;
+            transition: 0.3s ease;
         }
 
         .scrollbox_container_card:hover {
-            filter: brightness(0.65); /* 变暗效果 */
-        }
 
-        .scrollbox_container_card p:hover {
-            transform: scale(1.1);
-            opacity: 1;
-            user-select: none;
         }
 
         .scrollbox_container_card p {
+            cursor: url('imgs/readmore.svg'),auto;
             position: absolute;
             font-family: sans-serif;
             font-size: 5rem;
-            color: #000000;
+            color: #17f700;
             font-weight: 900;
             text-transform: uppercase;
-            z-index: 2;
-            cursor: pointer;
             transition: opacity 0.3s ease, transform 0.3s ease;
             opacity: 0;
+            user-select: none;
+            text-shadow: 
+                -1px -1px 0 #000,  
+                 1px -1px 0 #000,
+                -1px  1px 0 #000,
+                 1px  1px 0 #000; 
+        }
+
+        .scrollbox_container_card p:hover {
+            cursor: pointer;
+            transform: scale(1.1);
+            opacity: 1;
             user-select: none;
         }
 
@@ -549,23 +554,23 @@
         <div class="scrollbox">
             <div class="scrollbox_container">
                 <div class="scrollbox_container_card" onclick="window.open('https://ixd-exhibit.uqcloud.net/teams/team-17/')">
-                    <p>Art Table Tennis</p>
+                    <p>READ MORE</p>
                     <img src="imgs/art table.gif" width="100%" height="100%">
                     <!-- <img class="scc_city scc_city1" src="imgs/city.svg">
                     <img class="scc_truck scc_truck1" src="imgs/truck.svg"> -->
                 </div>
                 <div class="scrollbox_container_card" onclick="loading.in('./ELDOME.html')">
-                    <p>ELDOME</p>
+                    <p>READ MORE</p>
                     <video autoplay loop muted width="100%" height="100%"><source src="imgs/4.mp4" type="video/mp4"></video>
                 </div>
                 <div class="scrollbox_container_card" onclick="loading.in('./ChuBang.html')">
-                    <p>Chubang Soy Sauce</p>
-                    <img src="imgs/CHUBANG.png" width="100%" height="100%">
+                    <p>READ MORE</p>
+                    <img src="imgs/chubanglogo123.png" width="100%" height="100%">
                     <!-- <img class="scc_city scc_city3" src="imgs/city.svg">
                     <img class="scc_truck scc_truck3" src="imgs/truck.svg"> -->
                 </div>
                 <div class="scrollbox_container_card" onclick="loading.in('./ChuBang.html')">
-                    <p>Chubang Soy Sauce</p>
+                    <p>READ MORE</p>
                     <img src="imgs/CHUBANG.png" width="100%" height="100%">
                     <!-- <img class="scc_city scc_city3" src="imgs/city.svg">
                     <img class="scc_truck scc_truck3" src="imgs/truck.svg"> -->

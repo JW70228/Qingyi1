@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hover Example</title>
+    <style>
+        .read-more-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            position: relative;
+            transition: background-color 0.3s;
+        }
+
+        .read-more-link:hover {
+            background-color: #0056b3;
+        }
+
+        .read-more-cursor {
+            align-items: center;
+            justify-content: center;
+            display: none;
+            position: absolute;
+            pointer-events: none;
+            background: rgba(255, 255, 255, 0);
+            font-size: 40px;
+            color: #000000;
+        }
+
+        .read-more-link:hover .read-more-cursor {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <a href="#" class="read-more-link">Hover over me!
+        <div class="read-more-cursor">Read More</div>
+    </a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const link = document.querySelector('.read-more-link');
+            const cursor = link.querySelector('.read-more-cursor');
+
+            link.addEventListener('mousemove', (e) => {
+                const rect = link.getBoundingClientRect();
+                const offsetX = e.clientX - rect.left;
+                const offsetY = e.clientY - rect.top;
+
+                cursor.style.left = `${offsetX + 30}px`; // 10px offset to the right
+                cursor.style.top = `${offsetY + 30}px`;  // 10px offset below
+            });
+        });
+    </script>
+</body>
+</html>
