@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV
+    </title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            font-size: 2vmin;
+        }
+
+        div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            background-color: #EDEDED;
+            background-image: url('imgs/CVbg.png');
+            min-height: 2000px; /* 使页面有滚动条 */
+        }
+
+        .cv {
+            border: #000000;
+            border-width: 0.15rem;
+            border-style: solid;
+            opacity: 1;
+            transform: translateY(90px);
+            transition: transform 0.4s ease;
+            user-select: none;
+            margin-bottom: 3rem;
+            margin-top: 3rem;
+        }
+
+        .cv.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .title {
+            font-family: sans-serif;
+            font-size: 7rem;
+            color: #505050;
+            font-weight: 900;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.2s ease, transform 0.6s ease;
+            user-select: none;
+            transition: 0.6s;
+        }
+
+        .title.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .title:hover {
+            transform: scale(1.06);
+            color: #17f700;
+        }
+
+        .title span {
+            font-size: 7rem;
+            color: #171717;
+            user-select: none;
+        }
+
+        .tt {
+            align-self: flex-start;
+            display: flex;
+            top: 44%;
+            position: sticky;
+        }
+
+        .loading {
+            background-image: url('imgs/cvloading.png');
+            position: fixed;
+            flex-direction: column;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: black;
+            z-index: 100000000;
+            transition: 1s ease;
+        }
+
+        .loading svg {
+            width: 5rem;
+            margin-bottom: 2rem;
+            overflow: visible;
+            transition: 0.3s ease;
+        }
+
+        .loading svg circle {
+            fill: none;
+            stroke: #ffffff;
+            stroke-width: 12;
+            stroke-dasharray: 160;
+            stroke-dashoffset: 160;
+            transform-origin: center;
+            animation: circle_rotate 3s ease-in infinite;
+        }
+
+        @keyframes circle_rotate {
+            0% {
+                transform: rotate(0deg);
+                stroke-dashoffset: 160;
+            }
+
+            100% {
+                transform: rotate(360deg);
+                stroke-dashoffset: -160;
+            }
+        }
+
+        .loading p {
+            font-family: sans-serif;
+            font-size: 2rem;
+            color: #ffffff;
+            font-weight: 900;
+            transition: 0.3s ease;
+        }
+
+        .loading_out {
+            transform: translateY(100%);
+        }
+
+        .loading_out svg,
+        .loading_out p {
+            opacity: 0;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="loading">
+        <svg viewbox='0 0 50 50'>
+            <circle r='25' cx='25' cy='25'></circle>
+        </svg>
+        <p>LOADING</p>
+    </div>
+    <div class="cv"><img src="imgs/cv.png" width="120%" height="120%"></div>
+    <div class="tt">
+        <p onclick="loading.in('./index.html')" class="title"> BAC<span>K</span></p>
+    </div>
+
+    <script>
+        const loading = {
+            container: document.querySelector(".loading"),
+            in(target) {
+                this.container.classList.remove("loading_out");
+                setTimeout(() => {
+                    window.location.href = target;
+                }, 1000)
+            },
+            out() {
+                this.container.classList.add("loading_out");
+                setTimeout(() => {
+                    document.querySelector(".cv").classList.add("show");
+                    document.querySelector(".title").classList.add("show");
+                }, 1000); // Adjust the delay to match the loading out transition
+            }
+        };
+
+        window.addEventListener("load", () => {
+            loading.out();
+        });
+
+        // 监听滚动事件，实现阻尼效果
+        const ttElement = document.querySelector('.tt');
+        let lastScrollTop = 0;
+        let currentTop = 0;
+        const damping = 0.03; // 阻尼系数
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            // 计算目标位置
+            const targetTop = scrollTop > lastScrollTop ? -6 : 0;
+            // 计算当前top位置
+            currentTop += (targetTop - currentTop) * damping;
+
+            // 更新tt元素的位置
+            ttElement.style.top = `${currentTop + 40}%`;
+
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // 避免负值
+        });
+    </script>
+</body>
+
+</html>

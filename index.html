@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qingyi_Wang</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            font-size: 2vmin;
+            scroll-behavior: smooth;
+            box-sizing: border-box;
+        }
+
+        div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* user-select: none; */
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            background-color: #171717;
+            overflow-x: hidden;
+        }
+
+        .intro {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            animation: fadeOut 3s forwards;
+        }
+
+        .title {
+            color: aliceblue;
+            letter-spacing: 0.1em;
+        }
+
+        .title:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, #000,#171717);
+            z-index: 3;
+            animation: animate 2s linear forwards;
+        }
+
+        @keyframes animate {
+            0% {
+                right: 0;
+            }
+
+            100% {
+                right: -200%;
+            }
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        .main-content {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .main-content.visible {
+            display: flex;
+        }
+
+        .navbar{
+            width: 100%;
+            background-color: black;
+        }
+
+        .container {
+            margin: 1rem;
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .brand {
+            color: #ffffff; /* text-white */
+            font-size: 1.7rem; /* text-lg */
+            font-weight: 700; /* font-bold */
+        }
+        .nav-links {
+            display: flex;
+            gap: 1rem; /* space-x-4 */
+        }
+        .nav-link {
+            font-weight: 530;
+            font-size: 1.4rem;
+            color: #c8d0dc; /* text-gray-300 */
+            text-decoration: none;
+            transition: 0.4s;
+        }
+        .nav-link:hover {
+            color: #17f700; /* hover:text-white */
+            transform: scale(1.09);
+        }
+        .section {
+            padding: 2rem; /* p-8 */
+        }
+        .section-title {
+            font-size: 1.875rem; /* text-3xl */
+            font-weight: 700; /* font-bold */
+        }
+
+        .rainbow_text{
+            background: rgba(0,0,0,0);
+            font-family: sans-serif;
+            font-size: 5rem;
+            color: #f7f7f7;
+            font-weight: 900;
+            position: absolute;
+        }
+
+        .rainbow {
+            background: rgb(0,0,0);
+            background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(23,23,23,1) 85%);
+            width: 100%;
+			height: 23rem;
+			position: relative;
+            z-index: -1;
+        }
+
+        .drop {
+			width: 5px;
+			height: 10rem;
+			position: absolute;
+			border-radius: 0 0 5px 5px;
+			animation: DropFall 5s linear infinite;
+            z-index: -1;
+		}
+
+		@keyframes DropFall {
+			from {
+				transform: translateY(-180%);
+			}
+
+			to {
+				transform: translateY(24rem);
+			}
+		}
+
+        .my_self {
+            z-index: 1;
+            display: flex;
+            width: 84%;
+            height: 42rem;
+            background-color: #171717;
+            border-radius: 2rem;
+            margin-bottom: 8rem;
+            text-transform: uppercase;
+        }
+
+        .my_self-1{
+            display: flex;
+            /* border: #17f700;
+            border-width: 0.15rem;
+            border-style: solid; */
+            z-index: 1;
+            object-fit: cover;
+            width: 100%;
+            height: 42rem;
+            border-radius: 2rem;
+            transition: 0.3s ease;
+        }
+
+        .my_self-1:hover{
+            transform: scale(1.07);
+        }
+
+        .skill {
+            display: flex;
+            border: #daf0fe;
+            border-width: 0.15rem;
+            border-style: solid;
+            z-index: 1;
+            width: 80%;
+            height: 58rem;
+            background-color: #171717;
+            border-radius: 2rem;
+            margin-bottom: 8rem;
+        }
+
+        .emptybox {
+            border: solid;
+            border: #171717;
+            width: 86%;
+            height: 39rem;
+            border-radius: 2rem;
+            margin-bottom: 9rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, filter 0.3s ease; /* 添加 filter 过渡效果 */
+            position: relative; /* 确保内部绝对定位的元素相对于这个盒子定位 */
+            overflow: hidden; /* 隐藏超出部分的内容 */
+        }
+
+        .emptybox:hover {
+        transform: scale(1.07);
+        filter: brightness(1.05); /* 变暗到 65% */
+        }
+
+        .emptybox p {
+            position: absolute; /* 绝对定位 */
+            font-family: sans-serif;
+            font-size: 5rem;
+            color: #ffffff;
+            font-weight: 900;
+            text-transform: uppercase;
+            z-index: 2;
+            cursor: pointer;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            opacity: 0;
+        }
+
+        .emptybox:hover p {
+            transform: scale(1.1);
+            opacity: 1;
+        }
+
+
+        .emptybox-1{
+            z-index: 1;
+            object-fit: cover;
+            width: 100%;
+            height: 39rem;
+            border-radius: 2rem;
+        }
+        
+
+        .subject {
+            font-size: 8rem;
+            color: #ffffff;
+            font-weight: 900;
+            user-select: none;
+        }
+
+        .subject1 {
+            margin-left: 2rem;
+            font-size: 8rem;
+            color: #17f700;
+            font-weight: 900;
+            user-select: none;
+        }
+
+        .subject-skill {
+            font-size: 8rem;
+            color: #36c6ff;
+            font-weight: 900;
+            user-select: none;
+        }
+
+        .scrollbox {
+            position: relative;
+            /* background-image: url('imgs/working.gif'); */
+            justify-content: start;
+            align-items: start;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .scrollbox_container {
+            position: relative;
+            justify-content: start;
+            height: 100vh;
+            flex-shrink: 0;
+        }
+
+        .scrollbox_container_card {
+            box-shadow: 0 0 15px rgb(0, 0, 0);
+            position: relative;
+            width: 65rem;
+            height: 40rem;
+            background-color: #ffffff;
+            border-radius: 2rem;
+            margin-left: 5rem;
+            margin-right: 5rem;
+            flex-shrink: 0;
+            overflow: hidden;
+            cursor: pointer;
+            transition: filter 0.3s ease;
+        }
+
+        .scrollbox_container_card:hover {
+            filter: brightness(0.65); /* 变暗效果 */
+        }
+
+        .scrollbox_container_card p:hover {
+            transform: scale(1.1);
+            opacity: 1;
+            user-select: none;
+        }
+
+        .scrollbox_container_card p {
+            position: absolute;
+            font-family: sans-serif;
+            font-size: 5rem;
+            color: #000000;
+            font-weight: 900;
+            text-transform: uppercase;
+            z-index: 2;
+            cursor: pointer;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            opacity: 0;
+            user-select: none;
+        }
+
+        .footing {
+            background-color: rgba(247, 247, 247, 0);
+            text-align:justify;
+            width: 100%;
+            height: 45rem;
+        }
+
+        
+        .loading {
+            position: fixed;
+            flex-direction: column;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color:black;
+            z-index: 100000000;
+            transition: 1s ease;
+        }
+
+        .loading svg {
+            width: 5rem;
+            margin-bottom: 2rem;
+            overflow: visible;
+            transition: 0.3s ease;
+        }
+
+        .loading svg circle {
+            fill: none;
+            stroke: #ffffff;
+            stroke-width: 12;
+            stroke-dasharray: 160;
+            stroke-dashoffset: 160;
+            transform-origin: center;
+            animation: circle_rotate 3s ease-in infinite;
+        }
+
+        @keyframes circle_rotate {
+            0% {
+                transform: rotate(0deg);
+                stroke-dashoffset: 160;
+            }
+
+            100% {
+                transform: rotate(360deg);
+                stroke-dashoffset: -160;
+            }
+        }
+
+        .loading p {
+            font-family: sans-serif;
+            font-size: 2rem;
+            color: #ffffff;
+            font-weight: 900;
+            transition: 0.3s ease;
+        }
+
+        .loading_out {
+            transform: translateY(100%);
+        }
+
+        .loading_out svg,
+        .loading_out p {
+            opacity: 0;
+        }
+
+
+        /* 技能条 */
+        ul,
+        li {
+        margin: 0;
+        padding: 0;
+        user-select: none;
+        }
+
+        main {
+        margin: 2rem;
+        display: flex;
+        height: 48rem;
+        width: 40%;
+        user-select: none;
+        }
+
+        ul {
+        width: 100%;
+        }
+
+        li {
+        line-height: 2;
+        font-family: sans-serif;
+        list-style: none;
+        color: #f9f9f9;
+        font-size: 2.1rem;
+        margin-bottom: 4rem;
+        position: relative;
+        }
+
+        li::before,
+        li::after {
+        content: "";
+        display: block;
+        height: 2.5rem;
+        width: 100%;
+        background-color: #262626;
+        position: absolute;
+        bottom: -28px;
+        border-radius: 0.5rem;
+        }
+
+        li::before {
+        box-shadow: 0 0 6px rgba(16, 16, 16, 0.2);
+        }
+
+        li::after {
+        content: "";
+        display: block;
+        height: 2.5rem;
+        width: 0; /* 初始宽度为0 */
+        position: absolute;
+        bottom: -28px;
+        border-radius: 0.5rem;
+        background-image: linear-gradient(90deg, #39c7ff, #28AADC);
+        transition: width 1.2s ease-in-out; /* 添加过渡效果 */
+        }
+
+        li::after {
+        animation-duration: 1.2s;
+        animation-fill-mode: forwards;
+        animation-timing-function: ease-in-out;
+        }
+
+        li.show.js::after {
+        width: 70%; /* 当添加show类时，宽度为70% */
+        }
+
+        li.show.react::after {
+        width: 85%; /* 当添加show类时，宽度为85% */
+        }
+
+        li.show.html5::after {
+        width: 95%; /* 当添加show类时，宽度为95% */
+        }
+
+        li.show.css::after {
+        width: 95%; /* 当添加show类时，宽度为95% */
+        }
+
+        li.show.AR::after {
+        width: 80%; /* 当添加show类时，宽度为80% */
+        }
+
+        li.show.OPCV::after {
+        width: 70%; /* 当添加show类时，宽度为70% */
+        }
+
+        li.show.D::after {
+        width: 82%; /* 当添加show类时，宽度为82% */
+        }
+
+        li.show.ino::after {
+        width: 92%; /* 当添加show类时，宽度为92% */
+        }
+
+        li.show.AI::after {
+        width: 73%; /* 当添加show类时，宽度为73% */
+        }
+
+        li.show.KN::after {
+        width: 95%; /* 当添加show类时，宽度为95% */
+        }
+
+        /* ino,ai,kn */
+    </style>
+</head>
+
+<body>
+    <div class="intro">
+        <h1 class="title">
+            <img src="imgs/Qingyi Wang.png" width="100%">
+        </h1>
+    </div>
+    <div class="main-content">
+        <nav class="navbar">
+            <div class="container">
+                <div class="brand">Qingyi Wang Portfolio</div>
+                <div class="nav-links">
+                    <a href="#CV" class="nav-link">CV</a>
+                    <a href="#work" class="nav-link">Work</a>
+                    <a href="#skill" class="nav-link">Skill</a>
+                    <a href="#Contact" class="nav-link">Contact</a>
+                </div>
+            </div>
+        </nav>
+        <div class="loading">
+            <svg viewbox='0 0 50 50'>
+                <circle r='25' cx='25' cy='25'></circle>
+            </svg>
+            <p>LOADING</p>
+        </div>
+        <div class="rainbow"><div class="rainbow_text">My hand,Your dream.</div></div>
+        <div class="my_self"><video id="myVideo" loop muted width="100%" height="100%" class="my_self-1"><source src="imgs/myself1.mp4" type="video/mp4"></video></div>
+        <div class="subject"><section id="CV"></section></div>
+        <div class="subject" >Curriculum<div class="subject1"> Vitae</div></div>
+        <div onclick="loading.in('./CV.html')" class="emptybox"><p>READ MORE</p><video autoplay loop muted width="100%" height="100%" class="emptybox-1"><source src="imgs/cv3.mp4" type="video/mp4"></video></div>
+        <div class="subject"><section id="work"></section></div>
+        <div class="subject">SELECT <div class="subject1"> WORK</div></div>
+        <div class="scrollbox">
+            <div class="scrollbox_container">
+                <div class="scrollbox_container_card" onclick="window.open('https://ixd-exhibit.uqcloud.net/teams/team-17/')">
+                    <p>Art Table Tennis</p>
+                    <img src="imgs/art table.gif" width="100%" height="100%">
+                    <!-- <img class="scc_city scc_city1" src="imgs/city.svg">
+                    <img class="scc_truck scc_truck1" src="imgs/truck.svg"> -->
+                </div>
+                <div class="scrollbox_container_card" onclick="loading.in('./ELDOME.html')">
+                    <p>ELDOME</p>
+                    <video autoplay loop muted width="100%" height="100%"><source src="imgs/4.mp4" type="video/mp4"></video>
+                </div>
+                <div class="scrollbox_container_card" onclick="loading.in('./ChuBang.html')">
+                    <p>Chubang Soy Sauce</p>
+                    <img src="imgs/CHUBANG.png" width="100%" height="100%">
+                    <!-- <img class="scc_city scc_city3" src="imgs/city.svg">
+                    <img class="scc_truck scc_truck3" src="imgs/truck.svg"> -->
+                </div>
+                <div class="scrollbox_container_card" onclick="loading.in('./ChuBang.html')">
+                    <p>Chubang Soy Sauce</p>
+                    <img src="imgs/CHUBANG.png" width="100%" height="100%">
+                    <!-- <img class="scc_city scc_city3" src="imgs/city.svg">
+                    <img class="scc_truck scc_truck3" src="imgs/truck.svg"> -->
+                </div>
+            </div>
+        </div>
+        <div class="subject"><section id="skill"></section></div>
+        <div class="subject">SKI<div class="subject-skill">LL</div></div>
+        <div class="skill">
+            <main>
+                <ul>
+                  <li class="html5">HTML5</li>
+                  <li class="js">JavaScript</li>
+                  <li class="css">CSS</li>
+                  <li class="react">React.js</li>
+                  <li class="AR">Augmented Reality</li>
+                  <li class="OPCV">OpenCV</li>
+                </ul>
+              </main>
+              <main>
+                <ul>
+                  <li class="D">Unity3D</li>
+                  <li class="ino">Arduino</li>
+                  <li class="AI">Image Recognition(AI)</li>
+                  <li class="KN">Keynote</li>
+                </ul>
+              </main>
+        </div>
+        <div class="subject"><section id="Contact"></section></div>
+        <div class="footing">
+            <div><img src="imgs/CONTACT ME (1).png" width="100%" height="100%"></div>
+        </div>
+    </div>
+</body>
+<script>
+// 开场动画
+document.addEventListener('DOMContentLoaded', (event) => {
+    setTimeout(() => {
+        document.querySelector('.intro').style.display = 'none';
+        document.querySelector('.main-content').classList.add('visible');
+        document.documentElement.style.overflow = 'auto';
+        document.body.style.overflow = 'auto';
+        scrollbox.locked = true; // 锁定计算值
+        scrollbox.resize();
+    }, 4000); // 4000毫秒 = 4秒
+});
+
+// 动态背景
+const main = document.querySelector('body');
+const colors = ['gold', 'orange', 'deeppink', 'skyblue', 'darkcyan', 'green', 'turquoise'];
+const count = 190;
+for (let i = 0; i < count; i++) {
+    const index = Math.floor(Math.random() * colors.length);
+    const drop = document.createElement('div');
+    drop.classList.add('drop');
+
+    const styles = {
+        background: `linear-gradient(transparent, ${colors[index]})`,
+        left: Math.random() * 98 + 'vw', // 确保雨滴位置在视口宽度内
+        animationDelay: Math.random() * -3 + 's',
+        animationDuration: 2 + Math.random() * 5 + 's',
+    };
+
+    for (let key in styles) {
+        drop.style[key] = styles[key];
+    }
+    main.appendChild(drop);
+}
+
+// 移动项目
+    const scrollbox = {
+            container: document.querySelector(".scrollbox_container"),
+            cards: [...document.querySelectorAll(".scrollbox_container_card")],
+            trigger_distance: 0,
+            border_distance: 0,
+            distance: 0,
+            locked: false, // 用于锁定计算值的标志
+            resize() {
+                if (!this.locked) {
+                    let _scrollbox = document.querySelector(".scrollbox");
+                    _scrollbox.style.height = `${this.container.offsetWidth}px`;
+                    this.trigger_distance = _scrollbox.offsetTop;
+                    this.border_distance = _scrollbox.offsetTop + _scrollbox.offsetHeight - window.innerHeight;
+                }
+            },
+            move() {
+                if (window.scrollY >= this.trigger_distance &&
+                    window.scrollY <= this.border_distance) {
+                    this.distance = window.scrollY - this.trigger_distance;
+                    this.container.style.transform = `translateY(${this.distance}px)`;
+                    let distance_x =
+                        this.distance / (this.border_distance - this.trigger_distance) *
+                        (this.container.offsetWidth - window.innerWidth);
+                    for (let i = 0; i < this.cards.length; i++) {
+                        this.cards[i].style.transform = `translateX(${-distance_x}px)`;
+                    }
+                }
+            }
+        };
+
+        // 初始化和事件监听器
+        scrollbox.resize();
+        window.addEventListener("resize", () => {
+            if (!scrollbox.locked) {
+                scrollbox.resize();
+            }
+        });
+        window.addEventListener("scroll", () => {
+            scrollbox.move();
+        });
+
+
+    // 加载页面
+    const loading = {
+        container: document.querySelector(".loading"),
+        in(target) {
+            this.container.classList.remove("loading_out");
+            setTimeout(() => {
+                window.location.href = target;
+            }, 1000)
+        },
+        out() {
+            this.container.classList.add("loading_out");
+        }
+    };
+    window.addEventListener("load", () => {
+        loading.out();
+    })
+
+    window.addEventListener('load', () => {
+            const video = document.getElementById('myVideo');
+            setTimeout(() => {
+                video.play();
+            }, 4200); // 延迟1秒（1000毫秒）
+        });
+
+    // 技能条加载的部分
+    const skillItems = document.querySelectorAll('main li');
+    const skillOffset = 70; // 设置垂直偏移值为5rem（80像素）
+
+    function isElementInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        return (
+            rect.top + skillOffset >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom - skillOffset <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+
+    function handleScroll() {
+        skillItems.forEach(item => {
+            if (isElementInViewport(item)) {
+                item.classList.add('show');
+            } else {
+                item.classList.remove('show'); // 滑出视口时移除 show 类
+            }
+        });
+    }
+
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('load', handleScroll);
+</script>
+
+</html>
