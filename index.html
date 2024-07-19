@@ -246,6 +246,11 @@
             cursor: pointer;
             transition: opacity 0.3s ease, transform 0.3s ease;
             opacity: 0;
+            text-shadow: 
+                -1px -1px 0 #000,  
+                 1px -1px 0 #000,
+                -1px  1px 0 #000,
+                 1px  1px 0 #000; 
         }
 
         .emptybox:hover p {
@@ -328,7 +333,7 @@
             color: #17f700;
             font-weight: 900;
             text-transform: uppercase;
-            transition: opacity 0.3s ease, transform 0.3s ease;
+            transition: opacity 0.3s ease;
             opacity: 0;
             user-select: none;
             text-shadow: 
@@ -340,7 +345,6 @@
 
         .scrollbox_container_card p:hover {
             cursor: pointer;
-            transform: scale(1.1);
             opacity: 1;
             user-select: none;
         }
