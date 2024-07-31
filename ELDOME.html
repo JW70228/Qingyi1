@@ -293,3 +293,34 @@
         <p>Continuously optimized the user interface and interaction processes based on user behavior data and feedback, ensuring the app is intuitive and meets the special needs of elderly users.</p>
         <h2>Usability Testing</h2>
         <p>Designed and conducted a series of usability tests to validate the effectiveness of the interface design, ensuring it is easy for elderly users to master.</p>
+    </div>
+
+    <div class="text-3">
+        <div class="main_infro"><img src="imgs/ELDOME Flyer-1.png" class="main_infro-1" width="100%" height="100%"></div>
+        <div class="main_infro"><video autoplay loop muted width="100%" height="100%" class="main_infro-1"><source src="imgs/ELDMOE real machine demonstration.MP4" type="video/mp4"></video></div>
+    </div>
+    <script>
+        const loading = {
+            container: document.querySelector(".loading"),
+            in(target) {
+                this.container.classList.remove("hidden");
+                setTimeout(() => {
+                    window.location.href = target;
+                }, 1000);
+            },
+            out() {
+                this.container.classList.add("hidden");
+                setTimeout(() => {
+                    document.querySelector(".cv").classList.add("show");
+                    document.querySelector(".title").classList.add("show");
+                }, 1000); // Adjust the delay to match the loading out transition
+            }
+        };
+
+        window.addEventListener("load", () => {
+            loading.out();
+        });
+    </script>
+</body>
+
+</html>
