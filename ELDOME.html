@@ -46,12 +46,7 @@
             height: 100vh;
             background-color: black;
             z-index: 100000000;
-            transition: opacity 1s ease;
-            opacity: 1;
-        }
-
-        .loading.hidden {
-            opacity: 0;
+            transition: 1s ease;
         }
 
         .loading svg {
@@ -89,6 +84,15 @@
             color: #ffffff;
             font-weight: 900;
             transition: 0.3s ease;
+        }
+
+        .loading_out {
+            transform: translateY(100%);
+        }
+
+        .loading_out svg,
+        .loading_out p {
+            opacity: 0;
         }
 
         .navbar {
@@ -310,13 +314,13 @@
         const loading = {
             container: document.querySelector(".loading"),
             in(target) {
-                this.container.classList.remove("hidden");
+                this.container.classList.remove("loading_out");
                 setTimeout(() => {
                     window.location.href = target;
-                }, 1000);
+                }, 1000)
             },
             out() {
-                this.container.classList.add("hidden");
+                this.container.classList.add("loading_out");
                 setTimeout(() => {
                     document.querySelector(".cv").classList.add("show");
                     document.querySelector(".title").classList.add("show");
