@@ -44,7 +44,12 @@
             height: 100vh;
             background-color: black;
             z-index: 100000000;
-            transition: 1s ease;
+            transition: opacity 1s ease;
+            opacity: 1;
+        }
+
+        .loading.hidden {
+            opacity: 0;
         }
 
         .loading svg {
@@ -82,15 +87,6 @@
             color: #ffffff;
             font-weight: 900;
             transition: 0.3s ease;
-        }
-
-        .loading_out {
-            transform: translateY(100%);
-        }
-
-        .loading_out svg,
-        .loading_out p {
-            opacity: 0;
         }
 
         .navbar {
@@ -159,7 +155,7 @@
         }
 
         .main_logo-1 {
-            object-fit:cover;
+            object-fit: cover;
             display: flex;
             width: 100%;
             height: 100%;
@@ -257,7 +253,7 @@
             margin-bottom: 8rem;
             flex-direction: column;
             align-items: flex-start;
-            justify-content:center;
+            justify-content: center;
         }
     </style>
 </head>
@@ -285,7 +281,8 @@
         <h1>Chubang Soy Sauce</h1>
         <h2>Research and Learning Center: 2024.05 - 2024.07</h2>
     </div>
-    <div class="text-2"><h1>Project Overview</h1>
+    <div class="text-2">
+        <h1>Project Overview</h1>
         <p>Participated in the design project for the Chubang Soy Sauce Research and Learning Center, primarily responsible for the design and technical support of the human-computer interaction section according to the budget and requirements.</p>
         <h1>Personal Contributions:</h1>
         <h2>Software Design</h2>
@@ -298,8 +295,8 @@
         <div style="position: relative; width: 100%; height: 0; padding-top: 61.5112%;
  padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden;
  border-radius: 8px; will-change: transform;">
-  <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
-    src="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAGLX3RQU_s&#x2F;Vl6aB_zekIqHlfAS3QX9pw&#x2F;view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
+            <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0; margin: 0;"
+                src="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAGLX3RQU_s&#x2F;Vl6aB_zekIqHlfAS3QX9pw&#x2F;view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
             </iframe>
         </div>
     </div>
@@ -307,13 +304,13 @@
         const loading = {
             container: document.querySelector(".loading"),
             in(target) {
-                this.container.classList.remove("loading_out");
+                this.container.classList.remove("hidden");
                 setTimeout(() => {
                     window.location.href = target;
-                }, 1000)
+                }, 1000);
             },
             out() {
-                this.container.classList.add("loading_out");
+                this.container.classList.add("hidden");
                 setTimeout(() => {
                     document.querySelector(".cv").classList.add("show");
                     document.querySelector(".title").classList.add("show");
