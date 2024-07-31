@@ -35,6 +35,7 @@
         }
 
         .loading {
+            background-size: cover;
             background-image: url('imgs/chubangloading.png');
             position: fixed;
             flex-direction: column;
@@ -45,6 +46,11 @@
             background-color: black;
             z-index: 100000000;
             transition: 1s ease;
+            opacity: 1;
+        }
+
+        .loading.hidden {
+            opacity: 0;
         }
 
         .loading svg {
@@ -307,13 +313,13 @@
         const loading = {
             container: document.querySelector(".loading"),
             in(target) {
-                this.container.classList.remove("loading_out");
+                this.container.classList.remove("hidden");
                 setTimeout(() => {
                     window.location.href = target;
-                }, 1000)
+                }, 1000);
             },
             out() {
-                this.container.classList.add("loading_out");
+                this.container.classList.add("hidden");
                 setTimeout(() => {
                     document.querySelector(".cv").classList.add("show");
                     document.querySelector(".title").classList.add("show");
@@ -322,7 +328,10 @@
         };
 
         window.addEventListener("load", () => {
-            loading.out();
+            const video = document.getElementById("mainVideo");
+            video.addEventListener("canplaythrough", () => {
+                loading.out();
+            });
         });
     </script>
 </body>
