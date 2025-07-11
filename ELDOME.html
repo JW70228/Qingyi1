@@ -305,25 +305,20 @@
     </div>
     <script>
         const loading = {
-            container: document.querySelector(".loading"),
-            in(target) {
-                this.container.classList.remove("loading_out");
-                setTimeout(() => {
-                    window.location.href = target;
-                }, 1000)
-            },
-            out() {
-                this.container.classList.add("loading_out");
-                setTimeout(() => {
-                    document.querySelector(".cv").classList.add("show");
-                    document.querySelector(".title").classList.add("show");
-                }, 1000); // Adjust the delay to match the loading out transition
-            }
-        };
-
-        window.addEventListener("load", () => {
-            loading.out();
-        });
+        container: document.querySelector(".loading"),
+        in(target) {
+            this.container.classList.remove("loading_out");
+            setTimeout(() => {
+                window.location.href = target;
+            }, 1000)
+        },
+        out() {
+            this.container.classList.add("loading_out");
+        }
+    };
+    window.addEventListener("load", () => {
+        loading.out();
+    })
     </script>
 </body>
 
