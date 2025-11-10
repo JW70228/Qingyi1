@@ -2,324 +2,392 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ELDOME</title>
-    <style>
-        * {
-            padding: 0;
-            margin: 0;
-            font-size: 2vmin;
-            user-select: none;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ELDOME</title>
+  <link rel="preload" as="image" href="imgs/edlobg.svg">
+  <link rel="preload" as="image" href="imgs/ELDOME Flyer-1.png">
+  <link rel="preload" as="video" href="imgs/copy_8028EDC1-6EF8-475E-82DF-9037B3EBF330.MP4">
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      font-size: 2vmin;
+      user-select: none;
+    }
 
-        div {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: 0.3s ease;
-        }
+    div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: 0.3s ease;
+    }
 
-        div:hover {
-            transform: scale(1.07);
-        }
+    div:hover {
+      transform: scale(1.07);
+    }
 
-        body {
-            background-size:cover;
-            background-image: url('imgs/edlobg.svg');
-            flex-direction: column;
-            align-items: center;
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            background-color: #ff9090;
-        }
+    body {
+      background-size: cover;
+      background-image: url('imgs/edlobg.svg');
+      flex-direction: column;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      background-color: #ff9090;
+      overflow-x: hidden;
+    }
 
-        .loading {
-            background-size:cover;
-            background-image: url('imgs/edlobg.svg');
-            position: fixed;
-            flex-direction: column;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background-color: black;
-            z-index: 100000000;
-            transition: 1s ease;
-        }
+    /* ================= Loader ================= */
+    .loading {
+      background-size: cover;
+      background-image: url('imgs/edlobg.svg');
+      position: fixed;
+      flex-direction: column;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: black;
+      z-index: 100000000;
+      transition: opacity 0.6s ease;
+      opacity: 1;
+    }
 
-        .loading svg {
-            width: 5rem;
-            margin-bottom: 2rem;
-            overflow: visible;
-            transition: 0.3s ease;
-        }
+    .loading.fade {
+      opacity: 0;
+      pointer-events: none;
+    }
 
-        .loading svg circle {
-            fill: none;
-            stroke: #ffffff;
-            stroke-width: 12;
-            stroke-dasharray: 160;
-            stroke-dashoffset: 160;
-            transform-origin: center;
-            animation: circle_rotate 3s ease-in infinite;
-        }
+    .loading svg {
+      width: 5rem;
+      margin-bottom: 2rem;
+      overflow: visible;
+      transition: 0.3s ease;
+    }
 
-        @keyframes circle_rotate {
-            0% {
-                transform: rotate(0deg);
-                stroke-dashoffset: 160;
-            }
+    .loading svg circle {
+      fill: none;
+      stroke: #ffffff;
+      stroke-width: 12;
+      stroke-dasharray: 160;
+      stroke-dashoffset: 160;
+      transform-origin: center;
+      animation: circle_rotate 3s ease-in infinite;
+    }
 
-            100% {
-                transform: rotate(360deg);
-                stroke-dashoffset: -160;
-            }
-        }
+    @keyframes circle_rotate {
+      0% {
+        transform: rotate(0deg);
+        stroke-dashoffset: 160;
+      }
 
-        .loading p {
-            font-family: sans-serif;
-            font-size: 2rem;
-            color: #ffffff;
-            font-weight: 900;
-            transition: 0.3s ease;
-        }
+      100% {
+        transform: rotate(360deg);
+        stroke-dashoffset: -160;
+      }
+    }
 
-        .loading_out {
-            transform: translateY(100%);
-        }
+    .loading p {
+      font-family: sans-serif;
+      font-size: 2rem;
+      color: #ffffff;
+      font-weight: 900;
+      transition: 0.3s ease;
+    }
 
-        .loading_out svg,
-        .loading_out p {
-            opacity: 0;
-        }
+    /* ================= Navbar ================= */
+    .navbar {
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.89);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
 
-        .navbar {
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.89);
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-        }
+    .container {
+      width: 90%;
+      margin: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-        .container {
-            width: 90%;
-            margin: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    .brand {
+      margin-left: 5rem;
+      color: #ffffff;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
 
-        .brand {
-            margin-left: 5rem;
-            color: #ffffff;
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+    }
 
-        .nav-links {
-            display: flex;
-            gap: 1rem;
-        }
+    .nav-link {
+      margin-right: 3rem;
+      font-weight: 700;
+      font-size: 1.6rem;
+      cursor: pointer;
+      color: #c8d0dc;
+      text-decoration: none;
+    }
 
-        .nav-link {
-            margin-right: 3rem;
-            font-weight: 700;
-            font-size: 1.6rem;
-            cursor: pointer;
-            color: #c8d0dc;
-            text-decoration: none;
-        }
+    .nav-link:hover {
+      transition: 0.5s;
+      color: #ff4f4f;
+    }
 
-        .nav-link:hover {
-            transition: 0.5s;
-            color: #ff4f4f;
-        }
+    /* ================= Sections ================= */
+    .section {
+      padding: 2rem;
+      margin-top: 4rem;
+    }
 
-        .section {
-            padding: 2rem;
-            margin-top: 4rem; /* Ensure sections don't overlap with the fixed navbar */
-        }
+    .section-title {
+      font-size: 1.875rem;
+      font-weight: 700;
+    }
 
-        .section-title {
-            font-size: 1.875rem;
-            font-weight: 700;
-        }
+    .main_logo {
+      margin-top: 6rem;
+      display: flex;
+      width: 71%;
+      height: 43rem;
+      margin-bottom: 2rem;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
 
-        .main_logo {
-            margin-top: 6rem;
-            display: flex;
-            width: 71%;
-            height: 43rem;
-            margin-bottom: 2rem;
-        }
+    .main_logo-1 {
+      object-fit: cover;
+      display: flex;
+      width: 100%;
+      height: 100%;
+    }
 
-        .main_logo-1 {
-            object-fit: cover;
-            display: flex;
-            width: 100%;
-            height: 100%;
-        }
+    .text-1,
+    .text-2,
+    .text-3 {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
 
-        .text-1 {
-            margin-top: 1rem;
-            z-index: 1;
-            display: flex;
-            width: 84%;
-            height: 10rem;
-            background-color: #ffffff00;
-            margin-bottom: 3rem;
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: flex-start;
-        }
+    body.reveal .main_logo,
+    body.reveal .text-1,
+    body.reveal .text-2,
+    body.reveal .text-3 {
+      opacity: 1;
+      transform: none;
+    }
 
-        .text-1 h1 {
-            font-family: sans-serif;
-            font-size: 5rem;
-            color: #000000;
-            font-weight: 900;
-        }
+    .text-1 {
+      margin-top: 1rem;
+      z-index: 1;
+      display: flex;
+      width: 84%;
+      height: 10rem;
+      background-color: transparent;
+      margin-bottom: 3rem;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
 
-        .text-1 h2 {
-            font-family: sans-serif;
-            font-size: 3rem;
-            color: #303030;
-            font-weight: 600;
-        }
+    .text-1 h1 {
+      font-family: sans-serif;
+      font-size: 5rem;
+      color: #000000;
+      font-weight: 900;
+    }
 
-        .text-2 {
-            margin-left: 25rem;
-            margin-top: 1rem;
-            z-index: 1;
-            display: flex;
-            width: 50rem;
-            height: 44rem;
-            background-color: #ffffff00;
-            align-items: flex-start;
-            justify-content: flex-start;
-            flex-direction: column;
-            margin-bottom: 2rem;
-        }
+    .text-1 h2 {
+      font-family: sans-serif;
+      font-size: 3rem;
+      color: #303030;
+      font-weight: 600;
+    }
 
-        .text-2 h1 {
-            margin-bottom: 1rem;
-            font-family: sans-serif;
-            font-size: 1.5rem;
-            color: #000000;
-            font-weight: 900;
-        }
+    .text-2 {
+      margin-left: 25rem;
+      margin-top: 1rem;
+      z-index: 1;
+      display: flex;
+      width: 50rem;
+      height: auto;
+      background-color: transparent;
+      align-items: flex-start;
+      justify-content: flex-start;
+      flex-direction: column;
+      margin-bottom: 2rem;
+    }
 
-        .text-2 h2 {
-            margin-bottom: 0.2rem;
-            font-family: sans-serif;
-            font-size: 1.3rem;
-            color: #000000;
-            font-weight: 900;
-        }
+    .text-2 h1 {
+      margin-bottom: 1rem;
+      font-family: sans-serif;
+      font-size: 1.5rem;
+      color: #000000;
+      font-weight: 900;
+    }
 
-        .text-2 p {
-            font-family: sans-serif;
-            font-size: 1.3rem;
-            color: #000000;
-            font-weight: 350;
-        }
+    .text-2 h2 {
+      margin-bottom: 0.2rem;
+      font-family: sans-serif;
+      font-size: 1.3rem;
+      color: #000000;
+      font-weight: 900;
+    }
 
-        .main_infro {
-            margin-top: 3rem;
-            z-index: 1;
-            display: flex;
-            width: 48%;
-            height: 67.2%;
-            background-color: #171717;
-            margin-bottom: 2rem;
-            text-transform: uppercase;
-        }
+    .text-2 p {
+      font-family: sans-serif;
+      font-size: 1.3rem;
+      color: #000000;
+      font-weight: 350;
+    }
 
-        .main_infro-1 {
-            display: flex;
-            z-index: 1;
-            width: 100%;
-            height: 100%;
-        }
+    .main_infro {
+      margin-top: 3rem;
+      z-index: 1;
+      display: flex;
+      width: 48%;
+      height: 67.2%;
+      background-color: #171717;
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+    }
 
-        .text-3 {
-            margin-top: 1rem;
-            z-index: 1;
-            display: flex;
-            width: 84%;
-            height: 100%;
-            background-color: #ffffff00;
-            margin-bottom: 3rem;
-            flex-direction: row;
-            align-items: flex-start;
-            justify-content: space-between;
-        }
-    </style>
+    .main_infro-1 {
+      display: flex;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+    }
+
+    .text-3 {
+      margin-top: 1rem;
+      z-index: 1;
+      display: flex;
+      width: 84%;
+      height: 100%;
+      background-color: transparent;
+      margin-bottom: 3rem;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+  </style>
 </head>
 
 <body>
-    <div class="loading">
-        <svg viewbox='0 0 50 50'>
-            <circle r='25' cx='25' cy='25'></circle>
-        </svg>
-        <p>LOADING</p>
-    </div>
+  <!-- Loader -->
+  <div class="loading">
+    <svg viewbox='0 0 50 50'>
+      <circle r='25' cx='25' cy='25'></circle>
+    </svg>
+    <p>LOADING</p>
+  </div>
 
-    <nav class="navbar">
-        <div class="container">
-            <div class="brand">ELDOME</div>
-            <div class="nav-links">
-                <a onclick="loading.in('./index.html')" class="nav-link">BACK HOME</a>
-            </div>
-        </div>
-    </nav>
-    <div class="main_logo"><video autoplay loop muted width="100%" height="100%" class="main_logo-1">
-        <source src="imgs/copy_8028EDC1-6EF8-475E-82DF-9037B3EBF330.MP4" type="video/mp4">
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="brand">ELDOME</div>
+      <div class="nav-links">
+        <a onclick="loading.in('./index.html')" class="nav-link">BACK HOME</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main_logo">
+    <video autoplay loop muted playsinline preload="auto"
+      poster="imgs/ELDOME Flyer-1.png" width="100%" height="100%" class="main_logo-1">
+      <source src="imgs/copy_8028EDC1-6EF8-475E-82DF-9037B3EBF330.MP4" type="video/mp4">
     </video>
-    </div>
-    <div class="text-1">
-        <h1>ELDOME</h1>
-        <h2>Elderly Care: 2023.07 - 2023.10</h2>
-    </div>
-    <div class="text-2"><h1>Project Overview</h1>
-        <p>ELDOME is an innovative mobile application designed to enhance social activities for the elderly in New Zealand, addressing new methods for collecting well-being metrics. It non-invasively gathers data and strengthens connections between the elderly and younger generations, improving their quality of life and emotional health.</p>
-        <h1>Personal Contributions:</h1>
-        <h2>Detailed Requirement Analysis</h2>
-        <p>Systematically analyzed the needs of elderly users, precisely defining feature requirements through multiple rounds of prototyping and user feedback loops.</p>
-        <h2>Agile Development Practice</h2>
-        <p>Adopted agile development methods to rapidly iterate on product features, effectively shortening the development cycle and increasing flexibility in responding to changes.</p>
-        <h2>User Experience Optimization</h2>
-        <p>Continuously optimized the user interface and interaction processes based on user behavior data and feedback, ensuring the app is intuitive and meets the special needs of elderly users.</p>
-        <h2>Usability Testing</h2>
-        <p>Designed and conducted a series of usability tests to validate the effectiveness of the interface design, ensuring it is easy for elderly users to master.</p>
-        <h2>Accessibility Design</h2>
-        <p>Emphasized accessibility principles by optimizing visual and touch elements, such as adjusting font sizes, button dimensions, and color contrast, making the app more suitable for users with limited visual and manual dexterity.</p>
-    </div>
+  </div>
 
-    <div class="text-3">
-        <div class="main_infro"><img src="imgs/ELDOME Flyer-1.png" class="main_infro-1" width="100%" height="100%"></div>
-        <div class="main_infro"><video autoplay loop muted width="100%" height="100%" class="main_infro-1"><source src="imgs/ELDMOE real machine demonstration.MP4" type="video/mp4"></video></div>
+  <div class="text-1">
+    <h1>ELDOME</h1>
+    <h2>Elderly Care: 2023.07 - 2023.10</h2>
+  </div>
+
+  <div class="text-2">
+    <h1>Project Overview</h1>
+    <p>ELDOME is an innovative mobile application designed to enhance social activities for the elderly in New Zealand,
+      addressing new methods for collecting well-being metrics. It non-invasively gathers data and strengthens
+      connections between the elderly and younger generations, improving their quality of life and emotional health.</p>
+    <h1>Personal Contributions:</h1>
+    <h2>Detailed Requirement Analysis</h2>
+    <p>Systematically analyzed the needs of elderly users, precisely defining feature requirements through multiple
+      rounds of prototyping and user feedback loops.</p>
+    <h2>Agile Development Practice</h2>
+    <p>Adopted agile development methods to rapidly iterate on product features, effectively shortening the development
+      cycle and increasing flexibility in responding to changes.</p>
+    <h2>User Experience Optimization</h2>
+    <p>Continuously optimized the user interface and interaction processes based on user behavior data and feedback,
+      ensuring the app is intuitive and meets the special needs of elderly users.</p>
+    <h2>Usability Testing</h2>
+    <p>Designed and conducted a series of usability tests to validate the effectiveness of the interface design,
+      ensuring it is easy for elderly users to master.</p>
+    <h2>Accessibility Design</h2>
+    <p>Emphasized accessibility principles by optimizing visual and touch elements, such as adjusting font sizes, button
+      dimensions, and color contrast, making the app more suitable for users with limited visual and manual dexterity.
+    </p>
+  </div>
+
+  <div class="text-3">
+    <div class="main_infro">
+      <img src="imgs/ELDOME Flyer-1.png" class="main_infro-1" loading="lazy" width="100%" height="100%">
     </div>
-    <script>
-        const loading = {
-        container: document.querySelector(".loading"),
-        in(target) {
-            this.container.classList.remove("loading_out");
-            setTimeout(() => {
-                window.location.href = target;
-            }, 1000)
-        },
-        out() {
-            this.container.classList.add("loading_out");
-        }
+    <div class="main_infro">
+      <video autoplay loop muted playsinline preload="auto"
+        poster="imgs/ELDOME Flyer-1.png" width="100%" height="100%" class="main_infro-1">
+        <source src="imgs/ELDMOE real machine demonstration.MP4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+
+  <script>
+    const loading = {
+      container: document.querySelector(".loading"),
+      in(target) {
+        this.container.classList.remove("fade");
+        setTimeout(() => {
+          window.location.href = target;
+        }, 1000);
+      },
+      fadeOut() {
+        this.container.classList.add("fade");
+      }
     };
-    window.addEventListener("load", () => {
-        loading.out();
-    })
-    </script>
+
+    async function readyForFirstPaint() {
+      const imgPromises = [...document.images].map(img =>
+        (img.complete ? Promise.resolve() : img.decode().catch(() => { }))
+      );
+
+      const videoPromises = [...document.querySelectorAll('video')].map(v =>
+        new Promise(res => {
+          if (v.readyState >= 3) return res();
+          v.addEventListener('canplaythrough', res, { once: true });
+          try { v.load(); } catch (e) { }
+        })
+      );
+
+      await Promise.allSettled([...imgPromises, ...videoPromises]);
+      await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+    }
+
+    window.addEventListener('DOMContentLoaded', async () => {
+      await readyForFirstPaint();
+      document.body.classList.add('reveal');
+      loading.fadeOut();
+    });
+  </script>
 </body>
 
 </html>

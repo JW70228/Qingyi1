@@ -2,330 +2,381 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChuBang</title>
-    <style>
-        * {
-            padding: 0;
-            margin: 0;
-            font-size: 2vmin;
-            user-select: none;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChuBang</title>
 
-        div {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: 0.3s ease;
-        }
+  <!-- 预加载关键首屏资源 -->
+  <link rel="preload" as="image" href="imgs/chubangbg.png">
+  <link rel="preload" as="image" href="imgs/chubangnav.png">
+  <link rel="preload" as="image" href="imgs/chubanglogo.png">
+  <link rel="preload" as="image" href="imgs/chubanglogo.svg">
 
-        div:hover {
-            transform: scale(1.05);
-        }
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      font-size: 2vmin;
+      user-select: none;
+    }
 
-        body {
-            background-image: url('imgs/chubangbg.png');
-            flex-direction: column;
-            align-items: center;
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            background-color: #000000;
-        }
+    div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: 0.3s ease;
+    }
 
-        .loading {
-            background-image: url('imgs/chubangloading.png');
-            position: fixed;
-            flex-direction: column;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background-color: black;
-            z-index: 100000000;
-            transition: 1s ease;
-        }
+    div:hover {
+      transform: scale(1.05);
+    }
 
-        .loading svg {
-            width: 5rem;
-            margin-bottom: 2rem;
-            overflow: visible;
-            transition: 0.3s ease;
-        }
+    body {
+      background-image: url('imgs/chubangbg.png');
+      flex-direction: column;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      background-color: #000000;
+      overflow-x: hidden;
+    }
 
-        .loading svg circle {
-            fill: none;
-            stroke: #ffffff;
-            stroke-width: 12;
-            stroke-dasharray: 160;
-            stroke-dashoffset: 160;
-            transform-origin: center;
-            animation: circle_rotate 3s ease-in infinite;
-        }
+    /* ============ Loader：改为淡出，避免露出纯背景 ============ */
+    .loading {
+      background-image: url('imgs/chubangloading.png');
+      position: fixed;
+      flex-direction: column;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: black;
+      z-index: 100000000;
+      transition: opacity .6s ease;
+      opacity: 1;
+    }
 
-        @keyframes circle_rotate {
-            0% {
-                transform: rotate(0deg);
-                stroke-dashoffset: 160;
-            }
+    .loading.fade {
+      opacity: 0;
+      pointer-events: none;
+    }
 
-            100% {
-                transform: rotate(360deg);
-                stroke-dashoffset: -160;
-            }
-        }
+    .loading svg {
+      width: 5rem;
+      margin-bottom: 2rem;
+      overflow: visible;
+      transition: 0.3s ease;
+    }
 
-        .loading p {
-            font-family: sans-serif;
-            font-size: 2rem;
-            color: #ffffff;
-            font-weight: 900;
-            transition: 0.3s ease;
-        }
+    .loading svg circle {
+      fill: none;
+      stroke: #ffffff;
+      stroke-width: 12;
+      stroke-dasharray: 160;
+      stroke-dashoffset: 160;
+      transform-origin: center;
+      animation: circle_rotate 3s ease-in infinite;
+    }
 
-        .loading_out {
-            transform: translateY(100%);
-        }
+    @keyframes circle_rotate {
+      0% { transform: rotate(0deg); stroke-dashoffset: 160; }
+      100% { transform: rotate(360deg); stroke-dashoffset: -160; }
+    }
 
-        .loading_out svg,
-        .loading_out p {
-            opacity: 0;
-        }
+    .loading p {
+      font-family: sans-serif;
+      font-size: 2rem;
+      color: #ffffff;
+      font-weight: 900;
+      transition: 0.3s ease;
+    }
 
-        .navbar {
-            background-image: url('imgs/chubangnav.png');
-            width: 100%;
-            opacity: 0.96;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-        }
+    /* ============ Navbar ============ */
+    .navbar {
+      background-image: url('imgs/chubangnav.png');
+      width: 100%;
+      opacity: 0.96;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
 
-        .container {
-            width: 90%;
-            margin: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    .container {
+      width: 90%;
+      margin: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-        .brand {
-            width: 4.3%;
-            height: 2.5%;
-            margin-left: 5rem;
-            color: #ffffff;
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
+    .brand {
+      width: 4.3%;
+      height: 2.5%;
+      margin-left: 5rem;
+      color: #ffffff;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
 
-        .nav-links {
-            display: flex;
-            gap: 1rem;
-        }
+    .nav-links { display: flex; gap: 1rem; }
 
-        .nav-link {
-            margin-right: 4rem;
-            font-weight: 900;
-            font-size: 1.8rem;
-            cursor: pointer;
-            color: #400b0b;
-            text-decoration: none;
-        }
+    .nav-link {
+      margin-right: 4rem;
+      font-weight: 900;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: #400b0b;
+      text-decoration: none;
+    }
 
-        .nav-link:hover {
-            transition: 0.5s;
-            color: #ff1b1b;
-        }
+    .nav-link:hover { transition: 0.5s; color: #ff1b1b; }
 
-        .section {
-            padding: 2rem;
-            margin-top: 4rem; /* Ensure sections don't overlap with the fixed navbar */
-        }
+    .section { padding: 2rem; margin-top: 4rem; }
+    .section-title { font-size: 1.875rem; font-weight: 700; }
 
-        .section-title {
-            font-size: 1.875rem;
-            font-weight: 700;
-        }
+    /* ============ 首屏内容：先隐藏，准备好后淡入 ============ */
+    .main_logo,
+    .text-1,
+    .text-2,
+    .text-3 {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
 
-        .main_logo {
-            margin-top: 6rem;
-            display: flex;
-            width: 84%;
-            height: 40rem;
-            margin-bottom: 2rem;
-            justify-content: center;
-        }
+    body.reveal .main_logo,
+    body.reveal .text-1,
+    body.reveal .text-2,
+    body.reveal .text-3 {
+      opacity: 1;
+      transform: none;
+    }
 
-        .main_logo-1 {
-            object-fit:cover;
-            display: flex;
-            width: 100%;
-            height: 100%;
-        }
+    .main_logo {
+      margin-top: 6rem;
+      display: flex;
+      width: 84%;
+      height: 40rem;
+      margin-bottom: 2rem;
+      justify-content: center;
+    }
 
-        .text-1 {
-            margin-top: 1rem;
-            z-index: 1;
-            display: flex;
-            width: 84%;
-            height: 10rem;
-            background-color: #ffffff00;
-            margin-bottom: 3rem;
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content: flex-start;
-        }
+    .main_logo-1 {
+      object-fit: cover;
+      display: flex;
+      width: 100%;
+      height: 100%;
+    }
 
-        .text-1 h1 {
-            font-family: sans-serif;
-            font-size: 5rem;
-            color: #000000;
-            font-weight: 900;
-        }
+    .text-1 {
+      margin-top: 1rem;
+      z-index: 1;
+      display: flex;
+      width: 84%;
+      height: 10rem;
+      background-color: #ffffff00;
+      margin-bottom: 3rem;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
 
-        .text-1 h2 {
-            font-family: sans-serif;
-            font-size: 3rem;
-            color: #303030;
-            font-weight: 600;
-        }
+    .text-1 h1 {
+      font-family: sans-serif;
+      font-size: 5rem;
+      color: #000000;
+      font-weight: 900;
+    }
 
-        .text-2 {
-            margin-left: 25rem;
-            margin-top: 1rem;
-            z-index: 1;
-            display: flex;
-            width: 50rem;
-            height: 24rem;
-            background-color: #ffffff00;
-            align-items: flex-start;
-            justify-content: flex-start;
-            flex-direction: column;
-            margin-bottom: 2rem;
-        }
+    .text-1 h2 {
+      font-family: sans-serif;
+      font-size: 3rem;
+      color: #303030;
+      font-weight: 600;
+    }
 
-        .text-2 h1 {
-            margin-bottom: 1rem;
-            font-family: sans-serif;
-            font-size: 1.5rem;
-            color: #000000;
-            font-weight: 900;
-        }
+    .text-2 {
+      margin-left: 25rem;
+      margin-top: 1rem;
+      z-index: 1;
+      display: flex;
+      width: 50rem;
+      height: 24rem;
+      background-color: #ffffff00;
+      align-items: flex-start;
+      justify-content: flex-start;
+      flex-direction: column;
+      margin-bottom: 2rem;
+    }
 
-        .text-2 h2 {
-            margin-bottom: 0.2rem;
-            font-family: sans-serif;
-            font-size: 1.3rem;
-            color: #000000;
-            font-weight: 900;
-        }
+    .text-2 h1 {
+      margin-bottom: 1rem;
+      font-family: sans-serif;
+      font-size: 1.5rem;
+      color: #000000;
+      font-weight: 900;
+    }
 
-        .text-2 p {
-            font-family: sans-serif;
-            font-size: 1.3rem;
-            color: #000000;
-            font-weight: 350;
-        }
+    .text-2 h2 {
+      margin-bottom: 0.2rem;
+      font-family: sans-serif;
+      font-size: 1.3rem;
+      color: #000000;
+      font-weight: 900;
+    }
 
-        .main_infro {
-            margin-top: 3rem;
-            z-index: 1;
-            display: flex;
-            width: 48%;
-            height: 67.2%;
-            background-color: #171717;
-            margin-bottom: 2rem;
-            text-transform: uppercase;
-        }
+    .text-2 p {
+      font-family: sans-serif;
+      font-size: 1.3rem;
+      color: #000000;
+      font-weight: 350;
+    }
 
-        .main_infro-1 {
-            display: flex;
-            z-index: 1;
-            width: 100%;
-            height: 100%;
-        }
+    .main_infro {
+      margin-top: 3rem;
+      z-index: 1;
+      display: flex;
+      width: 48%;
+      height: 67.2%;
+      background-color: #171717;
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+    }
 
-        .text-3 {
-            margin-top: 1rem;
-            z-index: 1;
-            display: flex;
-            width: 80%;
-            height: 50%;
-            background-color: #ffffff00;
-            margin-bottom: 8rem;
-            flex-direction: column;
-            align-items: flex-start;
-            justify-content:center;
-        }
-    </style>
+    .main_infro-1 {
+      display: flex;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+    }
+
+    .text-3 {
+      margin-top: 1rem;
+      z-index: 1;
+      display: flex;
+      width: 80%;
+      height: 50%;
+      background-color: #ffffff00;
+      margin-bottom: 8rem;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    /* iframe 外容器样式保持不变 */
+    .canva-wrap {
+      position: relative;
+      width: 100%;
+      height: 0;
+      padding-top: 61.5112%;
+      padding-bottom: 0;
+      box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16);
+      margin-top: 1.6em;
+      margin-bottom: 0.9em;
+      overflow: hidden;
+      border-radius: 8px;
+      will-change: transform;
+    }
+
+    .canva-embed {
+      position: absolute; width: 100%; height: 100%;
+      top: 0; left: 0; border: none; padding: 0; margin: 0;
+    }
+  </style>
 </head>
 
 <body>
-    <div class="loading">
-        <svg viewbox='0 0 50 50'>
-            <circle r='25' cx='25' cy='25'></circle>
-        </svg>
-        <p>LOADING</p>
-    </div>
+  <!-- Loader -->
+  <div class="loading">
+    <svg viewbox="0 0 50 50">
+      <circle r="25" cx="25" cy="25"></circle>
+    </svg>
+    <p>LOADING</p>
+  </div>
 
-    <nav class="navbar">
-        <div class="container">
-            <div class="brand"><img id="logo2" src="imgs/chubanglogo.png" width="100%" height="120%"></div>
-            <div class="nav-links">
-                <a onclick="loading.in('./index.html')" class="nav-link">BACK HOME</a>
-            </div>
-        </div>
-    </nav>
-    <div class="main_logo">
-        <img src="imgs/chubanglogo.svg" width="100%" height="100%" class="main_logo-1">
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="brand">
+        <img id="logo2" src="imgs/chubanglogo.png" width="100%" height="120%" alt="ChuBang Logo">
+      </div>
+      <div class="nav-links">
+        <a onclick="loading.in('./index.html')" class="nav-link">BACK HOME</a>
+      </div>
     </div>
-    <div class="text-1">
-        <h1>Chubang Soy Sauce</h1>
-        <h2>Research and Learning Center: 2024.05 - 2024.07</h2>
-    </div>
-    <div class="text-2"><h1>Project Overview</h1>
-        <p>Participated in the design project for the Chubang Soy Sauce Research and Learning Center, primarily responsible for the design and technical support of the human-computer interaction section according to the budget and requirements.</p>
-        <h1>Personal Contributions:</h1>
-        <h2>Software Design</h2>
-        <p>Designed the game logic for the exhibition hall's game area to cater to different target audiences. Created multimedia area interactions using 3D holographic imaging.</p>
-        <h2>Hardware Design</h2>
-        <p>Developed interactive equipment for the multimedia area to engage with the target audience through immersive technology.</p>
-    </div>
+  </nav>
 
-    <div class="text-3">
-        <div style="position: relative; width: 100%; height: 0; padding-top: 61.5112%;
- padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden;
- border-radius: 8px; will-change: transform;">
-  <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
-    src="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAGLX3RQU_s&#x2F;Vl6aB_zekIqHlfAS3QX9pw&#x2F;view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
-            </iframe>
-        </div>
-    </div>
-    <script>
-        const loading = {
-            container: document.querySelector(".loading"),
-            in(target) {
-                this.container.classList.remove("loading_out");
-                setTimeout(() => {
-                    window.location.href = target;
-                }, 1000)
-            },
-            out() {
-                this.container.classList.add("loading_out");
-                setTimeout(() => {
-                    document.querySelector(".cv").classList.add("show");
-                    document.querySelector(".title").classList.add("show");
-                }, 1000); // Adjust the delay to match the loading out transition
-            }
-        };
+  <!-- 主视觉 -->
+  <div class="main_logo">
+    <img src="imgs/chubanglogo.svg" width="100%" height="100%" class="main_logo-1" alt="ChuBang Main Logo">
+  </div>
 
-        window.addEventListener("load", () => {
-            loading.out();
-        });
-        
-    </script>
+  <div class="text-1">
+    <h1>Chubang Soy Sauce</h1>
+    <h2>Research and Learning Center: 2024.05 - 2024.07</h2>
+  </div>
+
+  <div class="text-2">
+    <h1>Project Overview</h1>
+    <p>Participated in the design project for the Chubang Soy Sauce Research and Learning Center, primarily responsible
+      for the design and technical support of the human-computer interaction section according to the budget and requirements.</p>
+    <h1>Personal Contributions:</h1>
+    <h2>Software Design</h2>
+    <p>Designed the game logic for the exhibition hall's game area to cater to different target audiences. Created multimedia
+      area interactions using 3D holographic imaging.</p>
+    <h2>Hardware Design</h2>
+    <p>Developed interactive equipment for the multimedia area to engage with the target audience through immersive technology.</p>
+  </div>
+
+  <div class="text-3">
+    <div class="canva-wrap">
+      <iframe class="canva-embed" id="canvaFrame" loading="lazy"
+        src="https://www.canva.com/design/DAGLX3RQU_s/Vl6aB_zekIqHlfAS3QX9pw/view?embed"
+        allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
+    </div>
+  </div>
+
+  <script>
+    const loading = {
+      container: document.querySelector(".loading"),
+      in(target) {
+        this.container.classList.remove("fade");
+        setTimeout(() => { window.location.href = target; }, 1000);
+      },
+      fadeOut() {
+        this.container.classList.add("fade");
+      }
+    };
+
+    // 等关键图片 decode & 等 iframe load（或超时兜底），再显示正文并淡出 loader
+    async function readyForFirstPaint() {
+      // 图片 decode
+      const imgPromises = [...document.images].map(img =>
+        (img.complete ? Promise.resolve() : img.decode().catch(() => {}))
+      );
+
+      // Canva iframe 可能较慢：等待 load 或最多 2500ms 兜底
+      const iframe = document.getElementById('canvaFrame');
+      const iframeReady = new Promise(resolve => {
+        let done = false;
+        const finish = () => { if (!done) { done = true; resolve(); } };
+        iframe.addEventListener('load', finish, { once: true });
+        setTimeout(finish, 2500);
+      });
+
+      await Promise.allSettled([...imgPromises, iframeReady]);
+
+      // 再给浏览器 1 帧用于合成
+      await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+    }
+
+    window.addEventListener('DOMContentLoaded', async () => {
+      await readyForFirstPaint();
+      document.body.classList.add('reveal');  // 正文淡入
+      loading.fadeOut();                      // Loader 淡出
+    });
+  </script>
 </body>
-
 </html>
