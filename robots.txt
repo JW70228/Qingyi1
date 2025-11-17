@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://jw70228.github.io/Qingyi1/sitemap.xml
