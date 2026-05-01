@@ -65,12 +65,15 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
             position: fixed;
-            width: 100%;
-            height: 100%;
-            z-index: 10;
+            inset: 0;
+            width: 100vw;
+            height: 100dvh;
+            min-height: 100vh;
+            background-color: #000;
+            z-index: 100000001;
             animation: fadeOut 3s forwards;
+            overflow: hidden;
         }
 
         .title {
@@ -323,26 +326,45 @@
 
         .scrollbox {
             position: relative;
-            /* background-image: url('imgs/working.gif'); */
-            justify-content: start;
-            align-items: start;
             width: 100%;
-            overflow: hidden;
+            overflow-x: auto;
+            overflow-y: hidden;
+            cursor: grab;
+            padding: 4rem 0 8rem 0;
+            scrollbar-width: none;
+            scroll-behavior: auto;
+            -webkit-overflow-scrolling: touch;
+            user-select: none;
+            justify-content: flex-start;
+            align-items: center;
+            }
+
+
+        .scrollbox::-webkit-scrollbar {
+            display: none;
         }
 
+        .scrollbox:active {
+            cursor: grabbing;
+        }
+
+        
         .scrollbox_container {
             position: relative;
-            justify-content: start;
-            height: 100vh;
+            justify-content: flex-start;
+            align-items: center;
+            height: auto;
             flex-shrink: 0;
+            width: max-content;
+            transition: none;
         }
 
         .scrollbox_container_card {
             cursor: pointer;
             box-shadow: 0 0 15px rgb(0, 0, 0);
             position: relative;
-            width: 65rem;
-            height: 40rem;
+            width: 52rem;
+            height: 32rem;
             background-color: #ffffff;
             border-radius: 2rem;
             margin-left: 5rem;
@@ -350,6 +372,10 @@
             flex-shrink: 0;
             overflow: hidden;
             transition: 0.3s ease;
+        }
+
+        .scrollbox_container_card:hover {
+            transform: scale(1.06);
         }
 
         .scrollbox_container_card p {
@@ -387,11 +413,11 @@
         .loading {
             position: fixed;
             flex-direction: column;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background-color:black;
+            inset: 0;
+            width: 100vw;
+            height: 100%;
+            min-height: 120vh;
+            background-color: black;
             z-index: 100000000;
             transition: 1s ease;
         }
@@ -607,6 +633,34 @@
         <div class="subject">SELECT <div class="subject1"> WORK</div></div>
         <div class="scrollbox">
             <div class="scrollbox_container">
+<div class="scrollbox_container_card" onclick="window.open('https://www.bigscreenmedia.co.nz/')">
+    <p>READ MORE</p>
+    <img src="imgs/bsmlogo.png" width="100%" height="100%">
+</div>
+
+<div class="scrollbox_container_card" onclick="window.open('https://thecalilehotel.com/?utm_source=googleplaces&utm_medium=organic&utm_campaign=the-calile&utm_term=plcid_5909816758766354176')">
+    <p>READ MORE</p>
+    <img src="imgs/calile.png" width="100%" height="100%">
+</div>
+
+<div class="scrollbox_container_card" onclick="window.open('https://lotauto.com.au/index')">
+    <p>READ MORE</p>
+    <img src="imgs/lot auto.png" width="100%" height="100%">
+</div>
+
+<div class="scrollbox_container_card" onclick="window.open('https://happyhomestay.co.nz/en/')">
+    <p>READ MORE</p>
+    <img src="imgs/homestay.png" width="100%" height="100%">
+</div>
+
+<div class="scrollbox_container_card" onclick="window.open('https://mightywiser.com/')">
+    <p>READ MORE</p>
+    <img src="imgs/mitlogo.png" width="100%" height="100%">
+</div>
+<div class="scrollbox_container_card" onclick="window.open('./mingcafe.html', '_blank')">
+    <p>READ MORE</p>
+    <img src="imgs/mingcafe-cover.png" width="100%" height="100%">
+</div>
                 <div class="scrollbox_container_card" onclick="window.open('https://ixd-exhibit.uqcloud.net/archive/2024/teams/team-17/')">
                     <p>READ MORE</p>
                     <img src="imgs/art table.gif" width="100%" height="100%">
@@ -620,12 +674,6 @@
                 <div class="scrollbox_container_card" onclick="loading.in('./ChuBang.html')">
                     <p>READ MORE</p>
                     <img src="imgs/chubanglogo123.png" width="100%" height="100%">
-                    <!-- <img class="scc_city scc_city3" src="imgs/city.svg">
-                    <img class="scc_truck scc_truck3" src="imgs/truck.svg"> -->
-                </div>
-                <div class="scrollbox_container_card" onclick="loading.in('./ChuBang.html')">
-                    <p>READ MORE</p>
-                    <img src="imgs/CHUBANG.png" width="100%" height="100%">
                     <!-- <img class="scc_city scc_city3" src="imgs/city.svg">
                     <img class="scc_truck scc_truck3" src="imgs/truck.svg"> -->
                 </div>
@@ -660,6 +708,11 @@
     </div>
 </body>
 <script>
+
+if ("scrollRestoration" in history) {
+    history.scrollRestoration = "manual";
+}
+
 // 开场动画
 document.addEventListener('DOMContentLoaded', (event) => {
     setTimeout(() => {
@@ -667,8 +720,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         document.querySelector('.main-content').classList.add('visible');
         document.documentElement.style.overflow = 'auto';
         document.body.style.overflow = 'auto';
-        scrollbox.locked = true; // 锁定计算值
-        scrollbox.resize();
     }, 4000); // 4000毫秒 = 4秒
 });
 
@@ -695,46 +746,52 @@ for (let i = 0; i < count; i++) {
 }
 
 // 移动项目
-    const scrollbox = {
-            container: document.querySelector(".scrollbox_container"),
-            cards: [...document.querySelectorAll(".scrollbox_container_card")],
-            trigger_distance: 0,
-            border_distance: 0,
-            distance: 0,
-            locked: false, // 用于锁定计算值的标志
-            resize() {
-                if (!this.locked) {
-                    let _scrollbox = document.querySelector(".scrollbox");
-                    _scrollbox.style.height = `${this.container.offsetWidth}px`;
-                    this.trigger_distance = _scrollbox.offsetTop;
-                    this.border_distance = _scrollbox.offsetTop + _scrollbox.offsetHeight - window.innerHeight;
-                }
-            },
-            move() {
-                if (window.scrollY >= this.trigger_distance &&
-                    window.scrollY <= this.border_distance) {
-                    this.distance = window.scrollY - this.trigger_distance;
-                    this.container.style.transform = `translateY(${this.distance}px)`;
-                    let distance_x =
-                        this.distance / (this.border_distance - this.trigger_distance) *
-                        (this.container.offsetWidth - window.innerWidth);
-                    for (let i = 0; i < this.cards.length; i++) {
-                        this.cards[i].style.transform = `translateX(${-distance_x}px)`;
-                    }
-                }
-            }
-        };
+    // Select Work 鼠标横向拖动
+    const workScroll = document.querySelector(".scrollbox");
 
-        // 初始化和事件监听器
-        scrollbox.resize();
-        window.addEventListener("resize", () => {
-            if (!scrollbox.locked) {
-                scrollbox.resize();
-            }
-        });
-        window.addEventListener("scroll", () => {
-            scrollbox.move();
-        });
+let isDown = false;
+let startX = 0;
+let scrollLeft = 0;
+let isDragging = false;
+
+workScroll.addEventListener("mousedown", (e) => {
+    isDown = true;
+    isDragging = false;
+    workScroll.style.cursor = "grabbing";
+    startX = e.clientX;
+    scrollLeft = workScroll.scrollLeft;
+});
+
+window.addEventListener("mouseup", () => {
+    isDown = false;
+    workScroll.style.cursor = "grab";
+
+    setTimeout(() => {
+        isDragging = false;
+    }, 80);
+});
+
+window.addEventListener("mousemove", (e) => {
+    if (!isDown) return;
+
+    e.preventDefault();
+
+    const walk = (e.clientX - startX) * 1.2;
+
+    if (Math.abs(walk) > 6) {
+        isDragging = true;
+    }
+
+    requestAnimationFrame(() => {
+        workScroll.scrollLeft = scrollLeft - walk;
+    });
+});
+
+window.addEventListener("load", () => {
+    setTimeout(() => {
+        workScroll.scrollLeft = 0;
+    }, 100);
+});
 
 
     // 加载页面
