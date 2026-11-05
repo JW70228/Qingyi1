@@ -1,0 +1,33 @@
+name: Recover stalled Pages deployment
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/recover-pages.yml"
+
+permissions:
+  pages: write
+
+jobs:
+  cancel-stalled-deployment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Cancel the stalled Pages deployment
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PAGES_SHA: 75d332c669c9bbd10a14c5fe74d9d62a734e850d
+        shell: bash
+        run: |
+          curl --fail-with-body --silent --show-error --max-time 45 --request POST \
+            --header "Accept: application/vnd.github+json" \
+            --header "Authorization: Bearer $GH_TOKEN" \
+            --header "X-GitHub-Api-Version: 2026-03-10" \
+            --write-out "\nCancellation HTTP %{http_code}\n" \
+            "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/pages/deployments/${PAGES_SHA}/cancel"
+          curl --fail-with-body --silent --show-error --max-time 45 \
+            --header "Accept: application/vnd.github+json" \
+            --header "Authorization: Bearer $GH_TOKEN" \
+            --header "X-GitHub-Api-Version: 2026-03-10" \
+            "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/pages/deployments/${PAGES_SHA}"
