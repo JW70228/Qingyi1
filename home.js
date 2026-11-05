@@ -1,135 +1,113 @@
-(() => {
-  'use strict';
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const intro = document.querySelector('.intro');
-  const closeIntro = () => {
-    const hadFocus = intro.contains(document.activeElement);
-    intro.hidden = true;
-    if (hadFocus) document.querySelector('.brand').focus();
-  };
-  document.querySelector('.intro-skip').addEventListener('click', closeIntro);
-  if (reducedMotion.matches || window.location.hash) closeIntro();
-  else window.setTimeout(closeIntro, 2400);
+"use strict";
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const intro = document.querySelector('.intro');
+window.setTimeout(() => { intro.style.display = 'none'; }, reducedMotion.matches ? 0 : 3000);
 
-  // Decorative animation stays in the hero and uses fewer particles on phones.
-  const rainfall = document.querySelector('.rainfall');
-  if (!reducedMotion.matches) {
-    const colors = ['gold', 'orange', 'deeppink', 'skyblue', 'darkcyan', 'green', 'turquoise'];
-    const drops = document.createDocumentFragment();
-    const count = window.matchMedia('(max-width: 680px)').matches ? 18 : 55;
-    for (let i = 0; i < count; i++) {
-      const drop = document.createElement('span');
-      drop.className = 'drop';
-      drop.style.background = `linear-gradient(transparent, ${colors[i % colors.length]})`;
-      drop.style.left = `${Math.random() * 99}%`;
-      drop.style.animationDelay = `${Math.random() * -7}s`;
-      drop.style.animationDuration = `${3 + Math.random() * 5}s`;
-      drops.append(drop);
-    }
-    rainfall.append(drops);
-  }
+// Preserve the original colored rain effect and its desktop density.
+const main = document.querySelector('body');
+const colors = ['gold', 'orange', 'deeppink', 'skyblue', 'darkcyan', 'green', 'turquoise'];
+const count = reducedMotion.matches ? 0 : (window.matchMedia('(max-width: 900px)').matches ? 55 : 190);
+for (let i = 0; i < count; i++) {
+  const index = Math.floor(Math.random() * colors.length);
+  const drop = document.createElement('div');
+  drop.classList.add('drop');
+  drop.setAttribute('aria-hidden', 'true');
+  Object.assign(drop.style, {
+    background: `linear-gradient(transparent, ${colors[index]})`,
+    left: `min(${Math.random() * 98}vw, calc(100% - 5px))`,
+    animationDelay: Math.random() * -3 + 's',
+    animationDuration: 2 + Math.random() * 5 + 's'
+  });
+  main.appendChild(drop);
+}
 
-  // Keep loading and playback independent from the page's load event.
-  // Below-fold videos fetch only as they approach the viewport.
-  const videos = [...document.querySelectorAll('video')];
-  const saveData = navigator.connection?.saveData === true;
-  const prepareVideo = video => {
-    const source = video.querySelector('source[data-src]');
-    if (source) {
-      source.src = source.dataset.src;
-      delete source.dataset.src;
-      video.load();
-    }
-  };
-  const playVideo = video => {
-    prepareVideo(video);
-    if (!reducedMotion.matches && !saveData && !document.hidden) {
-      const playback = video.play();
-      if (playback?.catch) playback.catch(() => { /* User controls remain available. */ });
-    }
-  };
-  let videoObserver;
-  if ('IntersectionObserver' in window) {
-    videoObserver = new IntersectionObserver(entries => {
-      for (const entry of entries) {
-        entry.target.dataset.visible = String(entry.isIntersecting);
-        if (entry.isIntersecting) playVideo(entry.target);
-        else entry.target.pause();
-      }
-    }, { threshold: 0.15 });
-    videos.forEach(video => videoObserver.observe(video));
-  } else {
-    videos.forEach(prepareVideo);
-  }
-  document.addEventListener('visibilitychange', () => {
-    videos.forEach(video => {
-      if (document.hidden) video.pause();
-      else if (video.dataset.visible === 'true') playVideo(video);
+// Original horizontal work strip: native touch scrolling and desktop dragging.
+const workScroll = document.querySelector('.scrollbox');
+let isDown = false;
+let startX = 0;
+let scrollLeft = 0;
+let isDragging = false;
+workScroll.addEventListener('mousedown', event => {
+  if (event.button !== 0) return;
+  isDown = true; isDragging = false;
+  workScroll.style.cursor = 'grabbing';
+  startX = event.clientX; scrollLeft = workScroll.scrollLeft;
+});
+window.addEventListener('mouseup', () => {
+  isDown = false; workScroll.style.cursor = 'grab';
+  window.setTimeout(() => { isDragging = false; }, 0);
+});
+window.addEventListener('mousemove', event => {
+  if (!isDown) return;
+  event.preventDefault();
+  const walk = (event.clientX - startX) * 1.2;
+  if (Math.abs(walk) > 6) isDragging = true;
+  workScroll.scrollLeft = scrollLeft - walk;
+});
+workScroll.addEventListener('dragstart', event => event.preventDefault());
+workScroll.addEventListener('click', event => {
+  if (isDragging) { event.preventDefault(); event.stopPropagation(); }
+}, true);
+document.querySelectorAll('[role="link"]').forEach(link => {
+  link.addEventListener('keydown', event => {
+    if (event.key === 'Enter') { event.preventDefault(); link.click(); }
+  });
+});
+
+// Preserve the original transition without blocking on large video downloads.
+const loading = {
+  container: document.querySelector('.loading'),
+  in(target) {
+    this.container.classList.remove('loading_out');
+    window.setTimeout(() => { window.location.href = target; }, reducedMotion.matches ? 0 : 1000);
+  },
+  out() { this.container.classList.add('loading_out'); }
+};
+loading.out();
+window.addEventListener('pageshow', () => loading.out());
+
+const videos = [...document.querySelectorAll('video')];
+const saveData = navigator.connection?.saveData === true;
+let introFinished = reducedMotion.matches;
+const playVideo = video => {
+  if (reducedMotion.matches || saveData || document.hidden) return;
+  const source = video.querySelector('source[data-src]');
+  if (source) { source.src = source.dataset.src; delete source.dataset.src; video.load(); }
+  if (video.id === 'myVideo' && !introFinished) return;
+  video.play()?.catch(() => {});
+};
+window.setTimeout(() => {
+  introFinished = true;
+  const video = document.getElementById('myVideo');
+  if (video.dataset.visible === 'true') playVideo(video);
+}, 3000);
+if ('IntersectionObserver' in window) {
+  const videoObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      entry.target.dataset.visible = String(entry.isIntersecting);
+      if (entry.isIntersecting) playVideo(entry.target); else entry.target.pause();
     });
+  }, { threshold: .15 });
+  videos.forEach(video => videoObserver.observe(video));
+}
+document.addEventListener('visibilitychange', () => {
+  videos.forEach(video => {
+    if (document.hidden) video.pause(); else if (video.dataset.visible === 'true') playVideo(video);
   });
-  reducedMotion.addEventListener('change', () => {
-    if (reducedMotion.matches) {
-      closeIntro();
-      rainfall.replaceChildren();
-      videos.forEach(video => video.pause());
-    }
-  });
+});
 
-  const carousel = document.querySelector('.scrollbox');
-  const previous = document.querySelector('.work-prev');
-  const next = document.querySelector('.work-next');
-  const updateControls = () => {
-    previous.disabled = carousel.scrollLeft <= 2;
-    next.disabled = carousel.scrollLeft >= carousel.scrollWidth - carousel.clientWidth - 2;
-  };
-  const advance = direction => {
-    const card = carousel.querySelector('.scrollbox_container_card');
-    const gap = parseFloat(getComputedStyle(carousel.firstElementChild).gap) || 16;
-    carousel.scrollBy({ left: direction * (card.getBoundingClientRect().width + gap), behavior: reducedMotion.matches ? 'auto' : 'smooth' });
-  };
-  previous.addEventListener('click', () => advance(-1));
-  next.addEventListener('click', () => advance(1));
-  carousel.addEventListener('scroll', updateControls, { passive: true });
-  window.addEventListener('resize', updateControls, { passive: true });
-  carousel.addEventListener('keydown', event => {
-    if (event.target !== carousel) return;
-    if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
-      event.preventDefault();
-      advance(event.key === 'ArrowRight' ? 1 : -1);
-    }
-  });
-
-  // Native touch scrolling is untouched; desktop dragging never opens a card.
-  let dragging = false;
-  let moved = false;
-  let startX = 0;
-  let startScroll = 0;
-  carousel.addEventListener('pointerdown', event => {
-    if (event.pointerType !== 'mouse' || event.button !== 0) return;
-    dragging = true;
-    moved = false;
-    startX = event.clientX;
-    startScroll = carousel.scrollLeft;
-  });
-  window.addEventListener('pointermove', event => {
-    if (!dragging) return;
-    const distance = event.clientX - startX;
-    if (Math.abs(distance) > 6) {
-      moved = true;
-      carousel.classList.add('is-dragging');
-    }
-    if (moved) carousel.scrollLeft = startScroll - distance;
-  });
-  const endDrag = () => {
-    dragging = false;
-    carousel.classList.remove('is-dragging');
-    window.setTimeout(() => { moved = false; }, 0);
-  };
-  window.addEventListener('pointerup', endDrag);
-  window.addEventListener('pointercancel', endDrag);
-  carousel.addEventListener('dragstart', event => event.preventDefault());
-  carousel.addEventListener('click', event => {
-    if (moved) { event.preventDefault(); event.stopPropagation(); }
-  }, true);
-  updateControls();
-})();
+// Original skill bars: same thick bars, spacing, colors and reveal behavior.
+const skillItems = document.querySelectorAll('main li');
+const skillOffset = 70;
+function isElementInViewport(el) {
+  const rect = el.getBoundingClientRect();
+  return rect.top + skillOffset >= 0 && rect.left >= 0 &&
+    rect.bottom - skillOffset <= (window.innerHeight || document.documentElement.clientHeight) &&
+    rect.right <= (window.innerWidth || document.documentElement.clientWidth);
+}
+function handleScroll() {
+  skillItems.forEach(item => item.classList.toggle('show', isElementInViewport(item)));
+}
+window.addEventListener('scroll', handleScroll, { passive: true });
+window.addEventListener('resize', handleScroll, { passive: true });
+handleScroll();
