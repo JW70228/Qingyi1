@@ -3,849 +3,210 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-	<script>!function(s,a,e,v,n,t,z){if(s.saq)return;n=s.saq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!s._saq)s._saq=n;n.push=n;n.loaded=!0;n.version='1.0';n.queue=[];t=a.createElement(e);t.async=!0;t.src=v;z=a.getElementsByTagName(e)[0];z.parentNode.insertBefore(t,z)}(window,document,'script','https://tags.srv.stackadapt.com/events.js');saq('ts', 'r6Ps0e2aD90GM-GSg2OOkg');</script>
-
-    <!-- SEO Title -->
-    <title>Qingyi Wang | Interactive Web Portfolio</title>
-
-    <!-- SEO Description -->
-    <meta name="description" 
-          content="Welcome to Qingyi Wang’s portfolio — showcasing web development, UI/UX design, interactive installations, creative coding, and digital experiences including ELDOME, ChuBang, and more." />
-
-    <!-- Keywords -->
-    <meta name="keywords" 
-          content="Qingyi Wang, Portfolio, Interactive Design, Web Developer, UI UX, Creative Coding, Digital Art, ELDOME, ChuBang" />
-
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://jw70228.github.io/Qingyi1/" />
-
-    <!-- Open Graph (Facebook / Instagram / LinkedIn) -->
-    <meta property="og:title" content="Qingyi Wang | Interactive Web Portfolio" />
-    <meta property="og:description" 
-          content="Explore Qingyi Wang’s digital and interactive projects: web design, UI/UX, multimedia installations, animations, and creative technology." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Qingyi Wang | Web Developer &amp; Interactive Designer</title>
+    <meta name="description" content="Qingyi Wang (qingyiwang) is a web developer and interactive media designer in Auckland, New Zealand. Explore websites, UI/UX and digital experiences." />
+    <link rel="canonical" href="https://qingyiwang.com/" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="author" content="Qingyi Wang" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" href="favicon-96.png" sizes="96x96" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180" />
+    <link rel="manifest" href="site.webmanifest" />
+    <meta property="og:site_name" content="Qingyi Wang" />
+    <meta property="og:locale" content="en_NZ" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://jw70228.github.io/Qingyi1/" />
-    <meta property="og:image" content="https://jw70228.github.io/Qingyi1/imgs/qingyi_wang.png" />
-    <meta name="twitter:image" content="https://jw70228.github.io/Qingyi1/imgs/qingyi_wang.png" />
-
-
-    <!-- Twitter Card -->
+    <meta property="og:title" content="Qingyi Wang | Web Developer &amp; Interactive Designer" />
+    <meta property="og:description" content="Qingyi Wang (qingyiwang) is a web developer and interactive media designer in Auckland, New Zealand. Explore websites, UI/UX and digital experiences." />
+    <meta property="og:url" content="https://qingyiwang.com/" />
+    <meta property="og:image" content="https://qingyiwang.com/social-card.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="675" />
+    <meta property="og:image:alt" content="Qingyi Wang in white script on a black background" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Qingyi Wang | Interactive Web Portfolio" />
-    <meta name="twitter:description" 
-          content="Showcasing creative web development and digital interactive projects." />
-
-    <!-- Favicon 图标（可选）-->
-    <style>
-        * {
-            padding: 0;
-            margin: 0;
-            font-size: 2vmin;
-            scroll-behavior: smooth;
-            box-sizing: border-box;
-        }
-
-        div {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            /* user-select: none; */
-        }
-
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            background-color: #171717;
-            overflow-x: hidden;
-        }
-
-        .intro {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: fixed;
-            inset: 0;
-            width: 100vw;
-            height: 100dvh;
-            min-height: 100vh;
-            background-color: #000;
-            z-index: 100000001;
-            animation: fadeOut 3s forwards;
-            overflow: hidden;
-        }
-
-        .title {
-            color: aliceblue;
-            letter-spacing: 0.1em;
-        }
-
-        .title:after {
-            content: "";
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 200%;
-            height: 100%;
-            background: linear-gradient(to right, transparent, #000,#171717);
-            z-index: 3;
-            animation: animate 2s linear forwards;
-        }
-
-        @keyframes animate {
-            0% {
-                right: 0;
-            }
-
-            100% {
-                right: -200%;
-            }
-        }
-
-        @keyframes fadeOut {
-            0% {
-                opacity: 1;
-            }
-
-            90% {
-                opacity: 1;
-            }
-
-            100% {
-                opacity: 0;
-                visibility: hidden;
-            }
-        }
-
-        .main-content {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-        }
-
-        .main-content.visible {
-            display: flex;
-        }
-
-        .navbar{
-            width: 100%;
-            background-color: black;
-        }
-
-        .container {
-            margin: 1rem;
-            width: 90%;
-            margin-left: auto;
-            margin-right: auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .brand {
-            color: #ffffff; /* text-white */
-            font-size: 1.7rem; /* text-lg */
-            font-weight: 700; /* font-bold */
-        }
-        .nav-links {
-            display: flex;
-            gap: 1rem; /* space-x-4 */
-        }
-        .nav-link {
-            font-weight: 530;
-            font-size: 1.4rem;
-            color: #c8d0dc; /* text-gray-300 */
-            text-decoration: none;
-            transition: 0.4s;
-        }
-        .nav-link:hover {
-            color: #17f700; /* hover:text-white */
-            transform: scale(1.09);
-        }
-        .section {
-            padding: 2rem; /* p-8 */
-        }
-        .section-title {
-            font-size: 1.875rem; /* text-3xl */
-            font-weight: 700; /* font-bold */
-        }
-
-        .rainbow_text{
-            background: rgba(0,0,0,0);
-            font-family: sans-serif;
-            font-size: 3.8rem;
-            color: #f7f7f7;
-            font-weight: 900;
-            position: absolute;
-        }
-
-        .rainbow {
-            background: rgb(0,0,0);
-            background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(23,23,23,1) 85%);
-            width: 100%;
-			height: 23rem;
-			position: relative;
-            z-index: -1;
-        }
-
-        .drop {
-			width: 5px;
-			height: 10rem;
-			position: absolute;
-			border-radius: 0 0 5px 5px;
-			animation: DropFall 5s linear infinite;
-            z-index: -1;
-		}
-
-		@keyframes DropFall {
-			from {
-				transform: translateY(-180%);
-			}
-
-			to {
-				transform: translateY(24rem);
-			}
-		}
-
-        .my_self {
-            z-index: 1;
-            display: flex;
-            width: 84%;
-            height: 42rem;
-            background-color: #171717;
-            border-radius: 2rem;
-            margin-bottom: 8rem;
-            text-transform: uppercase;
-        }
-
-        .my_self-1{
-            display: flex;
-            /* border: #17f700;
-            border-width: 0.15rem;
-            border-style: solid; */
-            z-index: 1;
-            object-fit: cover;
-            width: 100%;
-            height: 42rem;
-            border-radius: 2rem;
-            transition: 0.3s ease;
-        }
-
-        .my_self-1:hover{
-            transform: scale(1.07);
-        }
-
-        .skill {
-            display: flex;
-            border: #daf0fe;
-            border-width: 0.15rem;
-            border-style: solid;
-            z-index: 1;
-            width: 80%;
-            height: 58rem;
-            background-color: #171717;
-            border-radius: 2rem;
-            margin-bottom: 8rem;
-        }
-
-        .emptybox {
-            border: solid;
-            border: #171717;
-            width: 86%;
-            height: 39rem;
-            border-radius: 2rem;
-            margin-bottom: 9rem;
-            cursor: pointer;
-            transition: transform 0.3s ease, filter 0.3s ease; /* 添加 filter 过渡效果 */
-            position: relative; /* 确保内部绝对定位的元素相对于这个盒子定位 */
-            overflow: hidden; /* 隐藏超出部分的内容 */
-        }
-
-        .emptybox:hover {
-        transform: scale(1.07);
-        filter: brightness(1.05); /* 变暗到 65% */
-        }
-
-        .emptybox p {
-            position: absolute; /* 绝对定位 */
-            font-family: sans-serif;
-            font-size: 5rem;
-            color: #ffffff;
-            font-weight: 900;
-            text-transform: uppercase;
-            z-index: 2;
-            cursor: pointer;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            opacity: 0;
-            text-shadow: 
-                -1px -1px 0 #000,  
-                 1px -1px 0 #000,
-                -1px  1px 0 #000,
-                 1px  1px 0 #000; 
-        }
-
-        .emptybox:hover p {
-            transform: scale(1.1);
-            opacity: 1;
-        }
-
-
-        .emptybox-1{
-            z-index: 1;
-            object-fit: cover;
-            width: 100%;
-            height: 39rem;
-            border-radius: 2rem;
-        }
-        
-
-        .subject {
-            font-size: 8rem;
-            color: #ffffff;
-            font-weight: 900;
-            user-select: none;
-        }
-
-        .subject1 {
-            margin-left: 2rem;
-            font-size: 8rem;
-            color: #17f700;
-            font-weight: 900;
-            user-select: none;
-        }
-
-        .subject-skill {
-            font-size: 8rem;
-            color: #36c6ff;
-            font-weight: 900;
-            user-select: none;
-        }
-
-        .scrollbox {
-            position: relative;
-            width: 100%;
-            overflow-x: auto;
-            overflow-y: hidden;
-            cursor: grab;
-            padding: 4rem 0 8rem 0;
-            scrollbar-width: none;
-            scroll-behavior: auto;
-            -webkit-overflow-scrolling: touch;
-            user-select: none;
-            justify-content: flex-start;
-            align-items: center;
-            }
-
-
-        .scrollbox::-webkit-scrollbar {
-            display: none;
-        }
-
-        .scrollbox:active {
-            cursor: grabbing;
-        }
-
-        
-        .scrollbox_container {
-            position: relative;
-            justify-content: flex-start;
-            align-items: center;
-            height: auto;
-            flex-shrink: 0;
-            width: max-content;
-            transition: none;
-        }
-
-        .scrollbox_container_card {
-            cursor: pointer;
-            box-shadow: 0 0 15px rgb(0, 0, 0);
-            position: relative;
-            width: 52rem;
-            height: 32rem;
-            background-color: #ffffff;
-            border-radius: 2rem;
-            margin-left: 5rem;
-            margin-right: 5rem;
-            flex-shrink: 0;
-            overflow: hidden;
-            transition: 0.3s ease;
-        }
-
-        .scrollbox_container_card:hover {
-            transform: scale(1.06);
-        }
-
-        .scrollbox_container_card p {
-            cursor: url('imgs/readmore.svg'),auto;
-            position: absolute;
-            font-family: sans-serif;
-            font-size: 5rem;
-            color: #17f700;
-            font-weight: 900;
-            text-transform: uppercase;
-            transition: opacity 0.3s ease;
-            opacity: 0;
-            user-select: none;
-            text-shadow: 
-                -1px -1px 0 #000,  
-                 1px -1px 0 #000,
-                -1px  1px 0 #000,
-                 1px  1px 0 #000; 
-        }
-
-        .scrollbox_container_card p:hover {
-            cursor: pointer;
-            opacity: 1;
-            user-select: none;
-        }
-
-        .footing {
-            background-color: rgba(247, 247, 247, 0);
-            text-align:justify;
-            width: 100%;
-            height: 45rem;
-        }
-
-        
-        .loading {
-            position: fixed;
-            flex-direction: column;
-            inset: 0;
-            width: 100vw;
-            height: 100%;
-            min-height: 120vh;
-            background-color: black;
-            z-index: 100000000;
-            transition: 1s ease;
-        }
-
-        .loading svg {
-            width: 5rem;
-            margin-bottom: 2rem;
-            overflow: visible;
-            transition: 0.3s ease;
-        }
-
-        .loading svg circle {
-            fill: none;
-            stroke: #ffffff;
-            stroke-width: 12;
-            stroke-dasharray: 160;
-            stroke-dashoffset: 160;
-            transform-origin: center;
-            animation: circle_rotate 3s ease-in infinite;
-        }
-
-        @keyframes circle_rotate {
-            0% {
-                transform: rotate(0deg);
-                stroke-dashoffset: 160;
-            }
-
-            100% {
-                transform: rotate(360deg);
-                stroke-dashoffset: -160;
-            }
-        }
-
-        .loading p {
-            font-family: sans-serif;
-            font-size: 2rem;
-            color: #ffffff;
-            font-weight: 900;
-            transition: 0.3s ease;
-        }
-
-        .loading_out {
-            transform: translateY(100%);
-        }
-
-        .loading_out svg,
-        .loading_out p {
-            opacity: 0;
-        }
-
-
-        /* 技能条 */
-        ul,
-        li {
-        margin: 0;
-        padding: 0;
-        user-select: none;
-        }
-
-        main {
-        margin: 2rem;
-        display: flex;
-        height: 48rem;
-        width: 40%;
-        user-select: none;
-        }
-
-        ul {
-        width: 100%;
-        }
-
-        li {
-        line-height: 2;
-        font-family: sans-serif;
-        list-style: none;
-        color: #f9f9f9;
-        font-size: 2.1rem;
-        margin-bottom: 4rem;
-        position: relative;
-        }
-
-        li::before,
-        li::after {
-        content: "";
-        display: block;
-        height: 2.5rem;
-        width: 100%;
-        background-color: #262626;
-        position: absolute;
-        bottom: -28px;
-        border-radius: 0.5rem;
-        }
-
-        li::before {
-        box-shadow: 0 0 6px rgba(16, 16, 16, 0.2);
-        }
-
-        li::after {
-        content: "";
-        display: block;
-        height: 2.5rem;
-        width: 0; /* 初始宽度为0 */
-        position: absolute;
-        bottom: -28px;
-        border-radius: 0.5rem;
-        background-image: linear-gradient(90deg, #39c7ff, #28AADC);
-        transition: width 1.2s ease-in-out; /* 添加过渡效果 */
-        }
-
-        li::after {
-        animation-duration: 1.2s;
-        animation-fill-mode: forwards;
-        animation-timing-function: ease-in-out;
-        }
-
-        li.show.js::after {
-        width: 70%; /* 当添加show类时，宽度为70% */
-        }
-
-        li.show.react::after {
-        width: 85%; /* 当添加show类时，宽度为85% */
-        }
-
-        li.show.html5::after {
-        width: 95%; /* 当添加show类时，宽度为95% */
-        }
-
-        li.show.css::after {
-        width: 95%; /* 当添加show类时，宽度为95% */
-        }
-
-        li.show.AR::after {
-        width: 80%; /* 当添加show类时，宽度为80% */
-        }
-
-        li.show.OPCV::after {
-        width: 70%; /* 当添加show类时，宽度为70% */
-        }
-
-        li.show.D::after {
-        width: 82%; /* 当添加show类时，宽度为82% */
-        }
-
-        li.show.ino::after {
-        width: 92%; /* 当添加show类时，宽度为92% */
-        }
-
-        li.show.AI::after {
-        width: 73%; /* 当添加show类时，宽度为73% */
-        }
-
-        li.show.KN::after {
-        width: 95%; /* 当添加show类时，宽度为95% */
-        }
-
-        /* ino,ai,kn */
-
-        .seo-hidden {
-    position: absolute;
-    left: -9999px;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
+    <meta name="twitter:title" content="Qingyi Wang | Web Developer &amp; Interactive Designer" />
+    <meta name="twitter:description" content="Qingyi Wang (qingyiwang) is a web developer and interactive media designer in Auckland, New Zealand. Explore websites, UI/UX and digital experiences." />
+    <meta name="twitter:image" content="https://qingyiwang.com/social-card.jpg" />
+    <meta name="twitter:image:alt" content="Qingyi Wang in white script on a black background" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://qingyiwang.com/#website",
+      "url": "https://qingyiwang.com/",
+      "name": "Qingyi Wang",
+      "alternateName": [
+        "QingyiWang",
+        "qingyiwang"
+      ],
+      "inLanguage": "en-NZ",
+      "publisher": {
+        "@id": "https://qingyiwang.com/#person"
+      }
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": "https://qingyiwang.com/#profile",
+      "url": "https://qingyiwang.com/",
+      "name": "Qingyi Wang | Web Developer & Interactive Designer",
+      "description": "Qingyi Wang (qingyiwang) is a web developer and interactive media designer in Auckland, New Zealand. Explore websites, UI/UX and digital experiences.",
+      "isPartOf": {
+        "@id": "https://qingyiwang.com/#website"
+      },
+      "mainEntity": {
+        "@id": "https://qingyiwang.com/#person"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://qingyiwang.com/#person",
+      "name": "Qingyi Wang",
+      "alternateName": [
+        "QingyiWang",
+        "qingyiwang"
+      ],
+      "url": "https://qingyiwang.com/",
+      "description": "Web developer and interactive media designer in Auckland, New Zealand. Creating websites, UI/UX and digital experiences.",
+      "sameAs": [
+        "https://www.linkedin.com/in/qingyi-wang-b286b3287/",
+        "https://github.com/JW70228"
+      ]
+    }
+  ]
 }
-
-    </style>
+    </script>
+    <script>!function(s,a,e,v,n,t,z){if(s.saq)return;n=s.saq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!s._saq)s._saq=n;n.push=n;n.loaded=!0;n.version='1.0';n.queue=[];t=a.createElement(e);t.async=!0;t.src=v;z=a.getElementsByTagName(e)[0];z.parentNode.insertBefore(t,z)}(window,document,'script','https://tags.srv.stackadapt.com/events.js');saq('ts', 'r6Ps0e2aD90GM-GSg2OOkg');</script>
+    <link rel="stylesheet" href="home.css" />
+    <script src="home.js" defer></script>
 </head>
-
 <body>
-    <div class="seo-hidden">
-    <h1>Qingyi Wang – Interactive Web Developer & Digital Designer</h1>
-    <p>
-        Qingyi Wang is a creative web developer and interactive media designer with experience across
-        front-end development, UI/UX design, creative coding, AR interactions, and digital installations.
-        Qingyi has academic backgrounds connected to The University of Queensland (UQ) and Massey University,
-        and is currently based in Auckland, New Zealand. 
-        This portfolio includes works such as ELDOME interactive installation, ChuBang visual branding,
-        multimedia animations, and modern web projects built with HTML, CSS, JavaScript, React,
-        and computer-vision technologies.
-        Related search terms include UQ Qingyi Wang, Massey Qingyi Wang, and Auckland Qingyi Wang.
-    </p>
-</div>
-
-    <div class="intro">
-        <h1 class="title">
-            <img src="imgs/qingyi_wang.png" width="100%">
-        </h1>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="intro" aria-label="Qingyi Wang introduction">
+        <picture class="intro-art">
+            <source media="(max-width: 600px) and (orientation: portrait)" srcset="qingyi_wang-mobile.png" />
+            <img src="imgs/qingyi_wang.png" alt="Qingyi Wang" width="5760" height="3240" fetchpriority="high" />
+        </picture>
+        <button class="intro-skip" type="button">Skip intro <span aria-hidden="true">↗</span></button>
     </div>
-    <div class="main-content">
-        <nav class="navbar">
-            <div class="container">
-                <div class="brand">Qingyi Wang Portfolio</div>
-                <div class="nav-links">
-                    <a href="#CV" class="nav-link">CV</a>
-                    <a href="#work" class="nav-link">Work</a>
-                    <a href="#skill" class="nav-link">Skill</a>
-                    <a href="#Contact" class="nav-link">Contact</a>
-                </div>
+    <header class="navbar">
+        <nav class="container" aria-label="Main navigation">
+            <a class="brand" href="./index.html">Qingyi Wang <span>Portfolio</span></a>
+            <div class="nav-links">
+                <a href="#CV" class="nav-link">CV</a>
+                <a href="#work" class="nav-link">Work</a>
+                <a href="#skill" class="nav-link">Skills</a>
+                <a href="#Contact" class="nav-link">Contact</a>
             </div>
         </nav>
-        <div class="loading">
-            <svg viewbox='0 0 50 50'>
-                <circle r='25' cx='25' cy='25'></circle>
-            </svg>
-            <p>LOADING</p>
+    </header>
+    <main id="main" class="main-content">
+        <section class="rainbow" aria-labelledby="name-heading">
+            <div class="rainfall" aria-hidden="true"></div>
+            <div class="hero-copy">
+                <h1 id="name-heading">Qingyi Wang</h1>
+                <p class="rainbow_text">Simple design,<br class="mobile-break" /> exceptional experience.</p>
+                <p class="hero-description">Web developer &amp; interactive media designer in Auckland, New Zealand.<br class="desktop-break" /> Creating websites, UI/UX and digital experiences.</p>
+            </div>
+        </section>
+        <div class="my_self">
+            <video id="myVideo" class="my_self-1" loop muted playsinline controls preload="metadata" poster="myself-poster.jpg" aria-label="Qingyi Wang portfolio showreel">
+                <source src="imgs/myself.mp4" type="video/mp4" />
+                <p>Your browser does not support video. <a href="imgs/myself.mp4">Watch the portfolio showreel</a>.</p>
+            </video>
         </div>
-        <div class="rainbow"><div class="rainbow_text">Simple design, Exceptional experience.</div></div>
-        <div class="my_self"><video id="myVideo" loop muted width="100%" height="100%" class="my_self-1"><source src="imgs/myself.mp4" type="video/mp4"></video></div>
-        <div class="subject"><section id="CV"></section></div>
-        <div class="subject" >Curriculum<div class="subject1"> Vitae</div></div>
-        <div onclick="loading.in('./CV.html')" class="emptybox"><p>READ MORE</p><video autoplay loop muted width="100%" height="100%" class="emptybox-1"><source src="imgs/cv3.mp4" type="video/mp4"></video></div>
-        <div class="subject"><section id="work"></section></div>
-        <div class="subject">SELECT <div class="subject1"> WORK</div></div>
-        <div class="scrollbox">
-            <div class="scrollbox_container">
-<div class="scrollbox_container_card" onclick="window.open('https://www.bigscreenmedia.co.nz/')">
-    <p>READ MORE</p>
-    <img src="imgs/bsmlogo.png" width="100%" height="100%">
-</div>
 
-<div class="scrollbox_container_card" onclick="window.open('https://thecalilehotel.com/?utm_source=googleplaces&utm_medium=organic&utm_campaign=the-calile&utm_term=plcid_5909816758766354176')">
-    <p>READ MORE</p>
-    <img src="imgs/calile.png" width="100%" height="100%">
-</div>
+        <section id="CV" class="cv-section content-section" aria-labelledby="cv-heading">
+            <h2 class="subject" id="cv-heading">Curriculum <span class="subject1">Vitae</span></h2>
+            <a href="./CV.html" class="emptybox" aria-label="Read Qingyi Wang’s curriculum vitae">
+                <video class="emptybox-1" loop muted playsinline preload="none" poster="cv-poster.jpg" aria-hidden="true" tabindex="-1"><source data-src="imgs/cv3.mp4" type="video/mp4" /></video>
+                <span class="card-label">View CV <span aria-hidden="true">↗</span></span>
+            </a>
+        </section>
 
-<div class="scrollbox_container_card" onclick="window.open('https://lotauto.com.au/index')">
-    <p>READ MORE</p>
-    <img src="imgs/lot auto.png" width="100%" height="100%">
-</div>
-
-<div class="scrollbox_container_card" onclick="window.open('https://happyhomestay.co.nz/en/')">
-    <p>READ MORE</p>
-    <img src="imgs/homestay.png" width="100%" height="100%">
-</div>
-
-<div class="scrollbox_container_card" onclick="window.open('https://mightywiser.com/')">
-    <p>READ MORE</p>
-    <img src="imgs/mitlogo.png" width="100%" height="100%">
-</div>
-<div class="scrollbox_container_card" onclick="window.open('./mingcafe.html', '_blank')">
-    <p>READ MORE</p>
-    <img src="imgs/mingcafe-cover.png" width="100%" height="100%">
-</div>
-                <div class="scrollbox_container_card" onclick="window.open('https://ixd-exhibit.uqcloud.net/archive/2024/teams/team-17/')">
-                    <p>READ MORE</p>
-                    <img src="imgs/art table.gif" width="100%" height="100%">
-                    <!-- <img class="scc_city scc_city1" src="imgs/city.svg">
-                    <img class="scc_truck scc_truck1" src="imgs/truck.svg"> -->
-                </div>
-                <div class="scrollbox_container_card" onclick="loading.in('./ELDOME.html')">
-                    <p>READ MORE</p>
-                    <video autoplay loop muted width="100%" height="100%"><source src="imgs/4.mp4" type="video/mp4"></video>
-                </div>
-                <div class="scrollbox_container_card" onclick="loading.in('./ChuBang.html')">
-                    <p>READ MORE</p>
-                    <img src="imgs/chubanglogo123.png" width="100%" height="100%">
-                    <!-- <img class="scc_city scc_city3" src="imgs/city.svg">
-                    <img class="scc_truck scc_truck3" src="imgs/truck.svg"> -->
+        <section id="work" class="work-section content-section" aria-labelledby="work-heading">
+            <h2 class="subject" id="work-heading">Select <span class="subject1">Work</span></h2>
+            <div class="work-toolbar">
+                <p id="work-instructions">Swipe or scroll to explore the projects.</p>
+                <div class="work-controls">
+                    <button type="button" class="work-prev" aria-label="Previous projects" aria-controls="work-carousel"><span aria-hidden="true">←</span></button>
+                    <button type="button" class="work-next" aria-label="Next projects" aria-controls="work-carousel"><span aria-hidden="true">→</span></button>
                 </div>
             </div>
-        </div>
-        <div class="subject"><section id="skill"></section></div>
-        <div class="subject">SKI<div class="subject-skill">LL</div></div>
-        <div class="skill">
-            <main>
+            <div class="scrollbox" id="work-carousel" role="region" aria-label="Selected projects" aria-describedby="work-instructions" tabindex="0">
+                <div class="scrollbox_container">
+                    <a class="scrollbox_container_card" href="https://www.bigscreenmedia.co.nz/" target="_blank" rel="noopener noreferrer" aria-label="Big Screen Media website (opens in a new tab)">
+                        <img src="imgs/bsmlogo.png" width="1920" height="1080" loading="lazy" decoding="async" alt="Big Screen Media" />
+                        <span class="card-label">Big Screen Media <span aria-hidden="true">↗</span></span>
+                    </a>
+                    <a class="scrollbox_container_card" href="https://thecalilehotel.com/" target="_blank" rel="noopener noreferrer" aria-label="The Calile Hotel website (opens in a new tab)">
+                        <img src="imgs/calile.png" width="1920" height="1080" loading="lazy" decoding="async" alt="The Calile Hotel" />
+                        <span class="card-label">The Calile Hotel <span aria-hidden="true">↗</span></span>
+                    </a>
+                    <a class="scrollbox_container_card" href="https://lotauto.com.au/index" target="_blank" rel="noopener noreferrer" aria-label="Lot Auto website (opens in a new tab)">
+                        <img src="imgs/lot auto.png" width="1920" height="1080" loading="lazy" decoding="async" alt="Lot Auto" />
+                        <span class="card-label">Lot Auto <span aria-hidden="true">↗</span></span>
+                    </a>
+                    <a class="scrollbox_container_card" href="https://happyhomestay.co.nz/en/" target="_blank" rel="noopener noreferrer" aria-label="Happy Homestay website (opens in a new tab)">
+                        <img src="imgs/homestay.png" width="1920" height="1080" loading="lazy" decoding="async" alt="Happy Homestay" />
+                        <span class="card-label">Happy Homestay <span aria-hidden="true">↗</span></span>
+                    </a>
+                    <a class="scrollbox_container_card" href="https://mightywiser.com/" target="_blank" rel="noopener noreferrer" aria-label="Mighty Wiser website (opens in a new tab)">
+                        <img src="imgs/mitlogo.png" width="1920" height="1080" loading="lazy" decoding="async" alt="Mighty Wiser" />
+                        <span class="card-label">Mighty Wiser <span aria-hidden="true">↗</span></span>
+                    </a>
+                    <a class="scrollbox_container_card" href="./mingcafe.html" aria-label="View the Ming Café loyalty app project">
+                        <img src="imgs/mingcafe-cover.png" width="1920" height="1080" loading="lazy" decoding="async" alt="Ming Café loyalty app" />
+                        <span class="card-label">Ming Café <span aria-hidden="true">↗</span></span>
+                    </a>
+                    <a class="scrollbox_container_card" href="https://ixd-exhibit.uqcloud.net/archive/2024/teams/team-17/" target="_blank" rel="noopener noreferrer" aria-label="Art Table interaction design exhibit (opens in a new tab)">
+                        <img src="imgs/art table.gif" width="1080" height="676" loading="lazy" decoding="async" alt="Art Table interactive installation" />
+                        <span class="card-label">Art Table <span aria-hidden="true">↗</span></span>
+                    </a>
+                    <a class="scrollbox_container_card" href="./ELDOME.html" aria-label="View the ELDOME interactive installation project">
+                        <video loop muted playsinline preload="none" poster="imgs/ELDOME.png" aria-hidden="true" tabindex="-1"><source data-src="imgs/4.mp4" type="video/mp4" /></video>
+                        <span class="card-label">ELDOME <span aria-hidden="true">↗</span></span>
+                    </a>
+                    <a class="scrollbox_container_card" href="./ChuBang.html" aria-label="View the ChuBang visual branding project">
+                        <img src="imgs/chubanglogo123.png" width="1851" height="887" loading="lazy" decoding="async" alt="ChuBang visual identity" />
+                        <span class="card-label">ChuBang <span aria-hidden="true">↗</span></span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="skill" class="skills-section content-section" aria-labelledby="skills-heading">
+            <h2 class="subject" id="skills-heading">Ski<span class="subject-skill">lls</span></h2>
+            <div class="skill">
                 <ul>
-                  <li class="html5">HTML5</li>
-                  <li class="js">JavaScript</li>
-                  <li class="css">CSS</li>
-                  <li class="react">React.js</li>
-                  <li class="AR">Augmented Reality</li>
-                  <li class="OPCV">OpenCV</li>
+                    <li style="--level:95%">HTML5</li>
+                    <li style="--level:70%">JavaScript</li>
+                    <li style="--level:95%">CSS</li>
+                    <li style="--level:85%">React.js</li>
+                    <li style="--level:80%">Augmented Reality</li>
+                    <li style="--level:70%">OpenCV</li>
                 </ul>
-              </main>
-              <main>
                 <ul>
-                  <li class="D">Unity3D</li>
-                  <li class="ino">Arduino</li>
-                  <li class="AI">Image Recognition(AI)</li>
-                  <li class="KN">Keynote</li>
+                    <li style="--level:82%">Unity3D</li>
+                    <li style="--level:92%">Arduino</li>
+                    <li style="--level:73%">Image Recognition (AI)</li>
+                    <li style="--level:95%">Keynote</li>
                 </ul>
-              </main>
+            </div>
+        </section>
+    </main>
+    <footer id="Contact" class="footing" aria-label="Contact Qingyi Wang">
+        <h2 class="contact-heading">Contact me</h2>
+        <div class="contact-links">
+            <a href="mailto:jw683455@gmail.com">jw683455@gmail.com <span aria-hidden="true">↗</span></a>
+            <a href="tel:+64273661056">+64 27 366 1056</a>
+            <a href="https://www.linkedin.com/in/qingyi-wang-b286b3287/" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
         </div>
-        <div class="subject"><section id="Contact"></section></div>
-        <div class="footing">
-            <div><img src="imgs/CONTACT ME.png" width="100%" height="100%"></div>
-        </div>
-    </div>
+        <a class="contact-art" href="imgs/CONTACT ME.png" aria-label="Open the full contact card and WeChat QR code">
+            <img src="imgs/CONTACT ME.png" width="2880" height="1200" loading="lazy" decoding="async" alt="Qingyi Wang contact card with WeChat QR code. Open the image to view it at full size." />
+        </a>
+    </footer>
 </body>
-<script>
-
-if ("scrollRestoration" in history) {
-    history.scrollRestoration = "manual";
-}
-
-// 开场动画
-document.addEventListener('DOMContentLoaded', (event) => {
-    setTimeout(() => {
-        document.querySelector('.intro').style.display = 'none';
-        document.querySelector('.main-content').classList.add('visible');
-        document.documentElement.style.overflow = 'auto';
-        document.body.style.overflow = 'auto';
-    }, 4000); // 4000毫秒 = 4秒
-});
-
-// 动态背景
-const main = document.querySelector('body');
-const colors = ['gold', 'orange', 'deeppink', 'skyblue', 'darkcyan', 'green', 'turquoise'];
-const count = 190;
-for (let i = 0; i < count; i++) {
-    const index = Math.floor(Math.random() * colors.length);
-    const drop = document.createElement('div');
-    drop.classList.add('drop');
-
-    const styles = {
-        background: `linear-gradient(transparent, ${colors[index]})`,
-        left: Math.random() * 98 + 'vw', // 确保雨滴位置在视口宽度内
-        animationDelay: Math.random() * -3 + 's',
-        animationDuration: 2 + Math.random() * 5 + 's',
-    };
-
-    for (let key in styles) {
-        drop.style[key] = styles[key];
-    }
-    main.appendChild(drop);
-}
-
-// 移动项目
-    // Select Work 鼠标横向拖动
-    const workScroll = document.querySelector(".scrollbox");
-
-let isDown = false;
-let startX = 0;
-let scrollLeft = 0;
-let isDragging = false;
-
-workScroll.addEventListener("mousedown", (e) => {
-    isDown = true;
-    isDragging = false;
-    workScroll.style.cursor = "grabbing";
-    startX = e.clientX;
-    scrollLeft = workScroll.scrollLeft;
-});
-
-window.addEventListener("mouseup", () => {
-    isDown = false;
-    workScroll.style.cursor = "grab";
-
-    setTimeout(() => {
-        isDragging = false;
-    }, 80);
-});
-
-window.addEventListener("mousemove", (e) => {
-    if (!isDown) return;
-
-    e.preventDefault();
-
-    const walk = (e.clientX - startX) * 1.2;
-
-    if (Math.abs(walk) > 6) {
-        isDragging = true;
-    }
-
-    requestAnimationFrame(() => {
-        workScroll.scrollLeft = scrollLeft - walk;
-    });
-});
-
-window.addEventListener("load", () => {
-    setTimeout(() => {
-        workScroll.scrollLeft = 0;
-    }, 100);
-});
-
-
-    // 加载页面
-    const loading = {
-        container: document.querySelector(".loading"),
-        in(target) {
-            this.container.classList.remove("loading_out");
-            setTimeout(() => {
-                window.location.href = target;
-            }, 1000)
-        },
-        out() {
-            this.container.classList.add("loading_out");
-        }
-    };
-    window.addEventListener("load", () => {
-        loading.out();
-    })
-
-    window.addEventListener('load', () => {
-            const video = document.getElementById('myVideo');
-            setTimeout(() => {
-                video.play();
-            }, 4200); // 延迟1秒（1000毫秒）
-        });
-
-    // 技能条加载的部分
-    const skillItems = document.querySelectorAll('main li');
-    const skillOffset = 70; // 设置垂直偏移值为5rem（80像素）
-
-    function isElementInViewport(el) {
-        const rect = el.getBoundingClientRect();
-        return (
-            rect.top + skillOffset >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom - skillOffset <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-    }
-
-    function handleScroll() {
-        skillItems.forEach(item => {
-            if (isElementInViewport(item)) {
-                item.classList.add('show');
-            } else {
-                item.classList.remove('show'); // 滑出视口时移除 show 类
-            }
-        });
-    }
-
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('load', handleScroll);
-</script>
-
 </html>

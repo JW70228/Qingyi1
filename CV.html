@@ -2,202 +2,96 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV
-    </title>
-    <style>
-        * {
-            padding: 0;
-            margin: 0;
-            font-size: 2vmin;
-        }
-
-        div {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            background-color: #EDEDED;
-            background-image: url('imgs/CVbg.png');
-            min-height: 2000px; /* 使页面有滚动条 */
-        }
-
-        .cv {
-            border: #000000;
-            border-width: 0.15rem;
-            border-style: solid;
-            opacity: 1;
-            transform: translateY(90px);
-            transition: transform 0.4s ease;
-            user-select: none;
-            margin-bottom: 3rem;
-            margin-top: 3rem;
-        }
-
-        .cv.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .title {
-            font-family: sans-serif;
-            font-size: 7rem;
-            color: #505050;
-            font-weight: 900;
-            cursor: pointer;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.2s ease, transform 0.6s ease;
-            user-select: none;
-            transition: 0.6s;
-        }
-
-        .title.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .title:hover {
-            transform: scale(1.06);
-            color: #17f700;
-        }
-
-        .title span {
-            font-size: 7rem;
-            color: #171717;
-            user-select: none;
-        }
-
-        .tt {
-            align-self: flex-start;
-            display: flex;
-            top: 44%;
-            position: sticky;
-        }
-
-        .loading {
-            background-image: url('imgs/cvloading.png');
-            position: fixed;
-            flex-direction: column;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background-color: black;
-            z-index: 100000000;
-            transition: 1s ease;
-        }
-
-        .loading svg {
-            width: 5rem;
-            margin-bottom: 2rem;
-            overflow: visible;
-            transition: 0.3s ease;
-        }
-
-        .loading svg circle {
-            fill: none;
-            stroke: #ffffff;
-            stroke-width: 12;
-            stroke-dasharray: 160;
-            stroke-dashoffset: 160;
-            transform-origin: center;
-            animation: circle_rotate 3s ease-in infinite;
-        }
-
-        @keyframes circle_rotate {
-            0% {
-                transform: rotate(0deg);
-                stroke-dashoffset: 160;
-            }
-
-            100% {
-                transform: rotate(360deg);
-                stroke-dashoffset: -160;
-            }
-        }
-
-        .loading p {
-            font-family: sans-serif;
-            font-size: 2rem;
-            color: #ffffff;
-            font-weight: 900;
-            transition: 0.3s ease;
-        }
-
-        .loading_out {
-            transform: translateY(100%);
-        }
-
-        .loading_out svg,
-        .loading_out p {
-            opacity: 0;
-        }
-
-    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>CV &amp; Experience | Qingyi Wang</title>
+    <meta name="description" content="Explore Qingyi Wang’s education, skills and experience in web development, UX design, digital optimization and interactive product design." />
+    <link rel="canonical" href="https://qingyiwang.com/CV.html" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="author" content="Qingyi Wang" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" href="favicon-96.png" sizes="96x96" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180" />
+    <link rel="manifest" href="site.webmanifest" />
+    <meta property="og:site_name" content="Qingyi Wang" />
+    <meta property="og:locale" content="en_NZ" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="CV &amp; Experience | Qingyi Wang" />
+    <meta property="og:description" content="Explore Qingyi Wang’s education, skills and experience in web development, UX design, digital optimization and interactive product design." />
+    <meta property="og:url" content="https://qingyiwang.com/CV.html" />
+    <meta property="og:image" content="https://qingyiwang.com/social-card.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="675" />
+    <meta property="og:image:alt" content="Qingyi Wang in white script on a black background" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CV &amp; Experience | Qingyi Wang" />
+    <meta name="twitter:description" content="Explore Qingyi Wang’s education, skills and experience in web development, UX design, digital optimization and interactive product design." />
+    <meta name="twitter:image" content="https://qingyiwang.com/social-card.jpg" />
+    <meta name="twitter:image:alt" content="Qingyi Wang in white script on a black background" />
+    <link rel="stylesheet" href="detail.css">
 </head>
 
-<body>
-    <div class="loading">
-        <svg viewbox='0 0 50 50'>
-            <circle r='25' cx='25' cy='25'></circle>
-        </svg>
-        <p>LOADING</p>
+<body class="cv-detail">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <nav class="navbar" aria-label="Portfolio navigation">
+    <div class="container">
+      <div class="brand">QINGYI WANG</div>
+      <a href="./index.html" class="nav-link">&larr; BACK HOME</a>
     </div>
-    <div class="cv"><img src="imgs/cv_bsm.png" width="130%" height="130%"></div>
-    <div class="tt">
-        <p onclick="loading.in('./index.html')" class="title"> BAC<span>K</span></p>
+  </nav>
+  <main id="main-content" class="cv-content">
+    <h1 class="cv-heading">Qingyi Wang — CV</h1>
+    <p class="cv-intro">Human–computer interaction designer and marketing strategist. Experience in web development, digital optimization, and interactive product design.</p>
+    <div class="cv-actions"><a href="imgs/cv_bsm.png" target="_blank" rel="noopener noreferrer">Open full-size CV &nearr;</a></div>
+    <div class="cv-layout">
+      <figure class="cv">
+        <img src="imgs/cv_bsm.png" width="794" height="3024" alt="Qingyi Wang's full CV. Education, skills, work experience, and project highlights are also available as readable text on this page." decoding="async">
+        <figcaption>Original CV — open the full-size version to zoom in or save.</figcaption>
+      </figure>
+      <section class="cv-text" aria-label="CV highlights in text">
+        <h2>Education</h2>
+        <h3>University of Queensland</h3>
+        <p>Bachelor of Information Technology (User Experience)<br><span class="cv-date">February 2022 – November 2024</span></p>
+        <h3>Massey University</h3>
+        <p>Master of Management (Marketing)<br><span class="cv-date">July 2025 – November 2026</span></p>
+        <h2>Skills</h2>
+        <ul>
+          <li>UX design, user research, prototyping, and usability testing</li>
+          <li>HTML, CSS, JavaScript, React.js, and augmented reality</li>
+          <li>Unity3D, Arduino, embedded hardware, and custom input devices</li>
+          <li>Figma, Adobe XD, Adobe Illustrator, Miro, and Python</li>
+          <li>Image recognition: OpenCV, YOLOv5, CUDA, and TensorRT</li>
+          <li>Languages: English and Mandarin</li>
+        </ul>
+        <h2>Work experience</h2>
+        <h3>Big Screen Media · New Zealand</h3>
+        <p class="cv-date">November 2025 – present</p>
+        <p>Web development, IT support, software implementation, SEO and GEO optimization, and digital operations for the company's web platform and media network.</p>
+        <h3>Freelancer · Web Development &amp; Digital Optimization</h3>
+        <p class="cv-date">2024 – present</p>
+        <p>Web development, IT support, SEO and GEO optimization, and digital operations for small businesses and individual clients.</p>
+        <h3>Guangdong Huagong Decoration Engineering Co., Ltd. · China</h3>
+        <p class="cv-date">May 2024 – July 2024</p>
+        <p>Human–computer interaction design and technical support for the Chubang Soy Sauce Research and Learning Center, including game logic and multimedia interactions.</p>
+        <h3>Wenzhou Zhubang Information Technology Co., Ltd. · China</h3>
+        <p class="cv-date">August 2024 – October 2024</p>
+        <p>Front-end web development, SQL database management, and OpenCart customization for the NetPay platform.</p>
+        <h2>Project experience</h2>
+        <h3>Art Table Tennis</h3>
+        <p class="cv-date">March 2024 – May 2024</p>
+        <p>Unity3D game development, wearable controllers, motion sensing, and image recognition for an interactive exhibition.</p>
+        <h3>99 Bikes Australia · SEO Enhancement</h3>
+        <p class="cv-date">March 2023 – May 2023</p>
+        <p>Keyword research, on-page SEO, content optimization, and website performance analysis.</p>
+        <h3>UQ Storypath · Website and Mobile Development</h3>
+        <p class="cv-date">June 2024 – October 2024</p>
+        <p>React web and React Native mobile development for an interactive campus treasure hunt with location-based projects and QR scanning.</p>
+        <h3>ELDOME · Product Design</h3>
+        <p class="cv-date">July 2023 – October 2023</p>
+        <p>Research, prototyping, agile iteration, usability testing, and accessible interface design for an app supporting elderly social engagement in New Zealand.</p>
+      </section>
     </div>
-
-    <script>
-        const loading = {
-            container: document.querySelector(".loading"),
-            in(target) {
-                this.container.classList.remove("loading_out");
-                setTimeout(() => {
-                    window.location.href = target;
-                }, 1000)
-            },
-            out() {
-                this.container.classList.add("loading_out");
-                setTimeout(() => {
-                    document.querySelector(".cv").classList.add("show");
-                    document.querySelector(".title").classList.add("show");
-                }, 1000); // Adjust the delay to match the loading out transition
-            }
-        };
-
-        window.addEventListener("load", () => {
-            loading.out();
-        });
-
-        // 监听滚动事件，实现阻尼效果
-        const ttElement = document.querySelector('.tt');
-        let lastScrollTop = 0;
-        let currentTop = 0;
-        const damping = 0.03; // 阻尼系数
-
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-            // 计算目标位置
-            const targetTop = scrollTop > lastScrollTop ? -6 : 0;
-            // 计算当前top位置
-            currentTop += (targetTop - currentTop) * damping;
-
-            // 更新tt元素的位置
-            ttElement.style.top = `${currentTop + 40}%`;
-
-            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // 避免负值
-        });
-    </script>
+  </main>
 </body>
-
 </html>
